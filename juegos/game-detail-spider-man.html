@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvel's Spider-Man: Miles Morales - PlayStation Store</title>
+    <link rel="stylesheet" href="game-detail-spider-man.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="https://cdn2.steamgriddb.com/logo_thumb/d2dd0c81db17acfecb071c0a32565677.png">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <a href="ps5.html">
+                    <img src="https://cdn2.steamgriddb.com/logo_thumb/d2dd0c81db17acfecb071c0a32565677.png" alt="PlayStation" class="logo">
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="../ps5.html" class="nav-link">Juegos <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="../ps5.html" class="nav-link">PS5 <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="../ps5.html" class="nav-link">PS4 <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="../ps5.html" class="nav-link">Servicios <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="../ps5.html" class="nav-link">Accesorios <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="../ps5.html" class="nav-link">Noticias <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="../ps5.html" class="nav-link">Tienda <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="../ps5.html" class="nav-link">Asistencia <i class="fas fa-chevron-down"></i></a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="cart-btn" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                <button class="login-btn" onclick="redirectToAuth()">Iniciar sesión</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="toggleCart()">&times;</span>
+            <h2>Carrito de Compras</h2>
+            <div id="cartItems">
+                <p class="empty-cart">Tu carrito está vacío</p>
+            </div>
+            <div class="cart-total">
+                <h3>Total: $<span id="cartTotal">0.00</span></h3>
+                <button class="checkout-btn" disabled>Proceder al Pago</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección 1: Hero con video de fondo -->
+    <section class="hero-section">
+        <div class="hero-video-container">
+            <video autoplay muted loop class="hero-video">
+                <source src="../videos/spidermancorto.mp4" type="video/mp4">
+                <!-- Video alternativo si no se encuentra el archivo -->
+                <source src="https://cdn.akamai.steamstatic.com/steam/apps/256910318/movie480_vp9.webm?t=1691520249" type="video/webm">
+            </video>
+            <div class="hero-overlay"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="game-logo">
+                <img src="https://cdn2.steamgriddb.com/logo_thumb/49ac4dcbd03f3f39085f257edefb5d0d.png" alt="Spider-Man: Miles Morales">
+            </div>
+            
+            <div class="game-info">
+                <h1 class="game-title">Marvel's Spider-Man: Miles Morales</h1>
+                <p class="game-developer">Sony Interactive Entertainment</p>
+                
+                <div class="platforms">
+                    <span class="platform-tag">PS5</span>
+                    <span class="platform-tag">PS4</span>
+                </div>
+                
+                <div class="price-section">
+                    <div class="price">US$49.99</div>
+                    <button class="add-to-cart-btn" onclick="addToCart()">
+                        <i class="fas fa-shopping-cart"></i> Añadir al carrito
+                    </button>
+                </div>
+                
+                <div class="release-info">
+                    <p>Disponible desde 12/11/2020</p>
+                    <p>Versión digital incluida sin costo adicional con la de PS4™.*</p>
+                    <p>Ayuda de juego admitido</p>
+                </div>
+                
+                <div class="content-rating">
+                    <div class="rating-tags">
+                        <span class="rating-tag">Lenguaje</span>
+                        <span class="rating-tag">Referencia a drogas</span>
+                        <span class="rating-tag">Sangre</span>
+                        <span class="rating-tag">Violencia</span>
+                    </div>
+                    <p class="in-game-purchase">Compras dentro del juego</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 2: Descripción del juego -->
+    <section class="description-section">
+        <div class="description-bg"></div>
+        <div class="container">
+            <div class="description-content">
+                <h2>DESCRIPCIÓN DEL JUEGO</h2>
+                <h3>Be greater. Be yourself.</h3>
+                
+                <p>Experimenta el ascenso de Miles Morales y sé testigo de cómo el nuevo héroe domina nuevos poderes increíbles y explosivos para convertirse en su propia versión de Spider-Man.</p>
+                
+                <p>En la última aventura del universo de Spider-Man de Marvel, el adolescente Miles Morales intenta ajustarse a su nuevo hogar mientras que sigue los pasos de su mentor, Peter Parker, para convertirse en el nuevo Spider-Man.</p>
+                
+                <p>Pero cuando un feroz enfrentamiento por el poder amenaza con destruir su hogar, el aspirante a héroe entiende que un gran poder conlleva una gran responsabilidad. Para salvar a la Nueva York de Marvel, Miles debe adoptar el manto de Spider-Man y volverlo propio.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 3: Características principales -->
+    <section class="features-section">
+        <div class="container">
+            <h2>Características principales</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <img src="https://gmedia.playstation.com/is/image/SIEPDC/spiderman-miles-morales-screenshot-01-disclaimer-en-01oct20?$1600px--t$" alt="El ascenso de Miles Morales">
+                    </div>
+                    <div class="feature-content">
+                        <h3>El ascenso de Miles Morales</h3>
+                        <p>Miles Morales descubre poderes explosivos que lo diferencian de su mentor, Peter Parker. Domina sus ataques bioeléctricos de ráfaga de veneno y su poder de camuflaje junto con espectaculares acrobacías de lanzamiento de telarañas, accesorios y habilidades.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <img src="https://gmedia.playstation.com/is/image/SIEPDC/spiderman-miles-morales-screenshot-04-disclaimer-en-01oct20?$1600px--t$" alt="Una guerra por el poder">
+                    </div>
+                    <div class="feature-content">
+                        <h3>Una guerra por el poder</h3>
+                        <p>Una guerra por el control de la Nueva York de Marvel estalló entre una corporación de energía siniestra y un ejército criminal con tecnología de punta. Ahora que su hogar es el epicentro de la batalla, Miles debe aprender el costo de convertirse en héroe y decidir qué sacrificar por el bien mayor.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <img src="https://gmedia.playstation.com/is/image/SIEPDC/spiderman-miles-morales-screenshot-03-disclaimer-en-01oct20?$1600px--t$" alt="Un nuevo y vibrante hogar">
+                    </div>
+                    <div class="feature-content">
+                        <h3>Un nuevo y vibrante hogar</h3>
+                        <p>Recorre las ciudades nevadas del nuevo vecindario ajetreado y bullicioso mientras Miles busca un sentido de pertenencia. Cuando la línea entre su vida personal y la lucha contra el crimen se vuelve demasiado fina, descubrirá en quién puede confiar y qué se siente estar realmente en casa.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="https://cdn2.steamgriddb.com/logo_thumb/d2dd0c81db17acfecb071c0a32565677.png" alt="PlayStation">
+                </div>
+                <div class="footer-links">
+                    <p>&copy; 2025 PlayStation Store. Todos los derechos reservados.</p>
+                    <p>Marvel's Spider-Man: Miles Morales es una marca registrada de Marvel Entertainment, LLC.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="game-detail-spider-man.js"></script>
+</body>
+</html>

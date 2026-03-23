@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xbox Store</title>
+    <link rel="stylesheet" href="xbox.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="https://logos-world.net/wp-content/uploads/2020/11/Xbox-Logo.png">
+</head>
+<body>
+
+        <!-- Anuncio de advertencia pequeño -->
+<div id="healthWarning" class="health-warning">
+    <div class="warning-content">
+        <span class="close-warning" onclick="closeHealthWarning()">×</span>
+        <h3>🕹️ ¡Juega con Responsabilidad!</h3>
+        <p>El exceso de gaming puede ser perjudicial para tu salud. Recuerda:</p>
+        <ul>
+            <li>⏰ Tomar descansos regulares</li>
+            <li>👀 Cuidar tu vista</li>
+            <li>💺 Mantener una postura correcta</li>
+            <li>⚖️ Balancear con otras actividades</li>
+        </ul>
+        <div class="warning-footer">
+            <label>
+                <input type="checkbox" id="dontShowAgain"> No mostrar este mensaje nuevamente
+            </label>
+        </div>
+    </div>
+</div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <img src="https://logos-world.net/wp-content/uploads/2020/11/Xbox-Logo.png" alt="Xbox" class="logo">
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link active" data-section="xbox">Inicio <i class="fas fa-home"></i></a></li>
+                <li><a href="#" class="nav-link" data-section="series">Series X|S <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="#" class="nav-link" data-section="xbox-one">Xbox One <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="#" class="nav-link" data-section="game-pass">Game Pass <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="#" class="nav-link" data-section="accesorios">Accesorios <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="#" class="nav-link" data-section="noticias">Noticias <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="#" class="nav-link" data-section="tienda">Tienda <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="#" class="nav-link" data-section="asistencia">Asistencia <i class="fas fa-chevron-down"></i></a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <div class="search-container">
+                    <input type="text" placeholder="Buscar juegos, accesorios, consolas..." class="search-input" id="searchInput">
+                    <i class="fas fa-search search-icon" onclick="performSearch()"></i>
+                    <div class="search-results" id="searchResults" style="display: none;"></div>
+                </div>
+                <button class="cart-btn" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                <div class="user-menu">
+                    <button class="login-btn" onclick="redirectToAuth()">Iniciar sesión</button>
+                    <div class="user-dropdown" id="userDropdown" style="display: none;">
+                        <div class="dropdown-item" onclick="viewProfile()">
+                            <i class="fas fa-user"></i>
+                            Mi Perfil
+                        </div>
+                        <div class="dropdown-item" onclick="viewOrderHistory()">
+                            <i class="fas fa-history"></i>
+                            Historial de Pedidos
+                        </div>
+                        <div class="dropdown-item" onclick="viewWishlist()">
+                            <i class="fas fa-heart"></i>
+                            Lista de Deseos
+                        </div>
+                        <div class="dropdown-item" onclick="viewSettings()">
+                            <i class="fas fa-cog"></i>
+                            Configuración
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item logout-item" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Cerrar Sesión
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Carrito de Compras</h2>
+                <span class="close" onclick="toggleCart()">&times;</span>
+            </div>
+            <div id="cartItems">
+                <p class="empty-cart">Tu carrito está vacío</p>
+            </div>
+            <div class="cart-total">
+                <h3>Total: $<span id="cartTotal">0.00</span></h3>
+                <button class="checkout-btn" disabled>Proceder al Pago</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN PRINCIPAL XBOX (INICIO) -->
+    <section id="section-xbox" class="content-section" style="display: block;">
+        <!-- Section 1: Hero Carousel -->
+        <section class="hero-section">
+            <div class="hero-carousel">
+                <div class="hero-slide active">
+                    <video autoplay muted loop class="hero-video">
+                        <source src="videos/Xbox/Halo.mp4" type="video/mp4">
+                    </video>
+                    <div class="hero-content">
+                        <div class="hero-logo">
+                            <img src="https://cdn2.steamgriddb.com/logo_thumb/f1ee083baf7bb88affb4bbe77dd229f0.png" alt="Halo Infinite">
+                        </div>
+                        <h1>La Guerra Ha Evolucionado</h1>
+                        <p>El Jefe Maestro regresa en Halo Infinite, la campaña más grande hasta ahora con un mundo abierto lleno de aventura.</p>
+                        <button class="cta-button">Jugar ahora</button>
+                    </div>
+                </div>
+                
+                <div class="hero-slide">
+                    <video autoplay muted loop class="hero-video">
+                        <source src="videos/Xbox/Horizon.mp4" type="video/mp4">
+                    </video>
+                    <div class="hero-content">
+                        <div class="hero-logo">
+                            <img src="https://cdn2.steamgriddb.com/logo_thumb/bad62ac73968977da02c6ef249d2edb7.png" alt="Forza Horizon">
+                        </div>
+                        <h1>México Te Espera</h1>
+                        <p>Explora el mundo abierto de México en Forza Horizon 5. Conduce cientos de autos en el festival más grande hasta ahora.</p>
+                        <button class="cta-button">Acelera ahora</button>
+                    </div>
+                </div>
+                
+                <div class="hero-slide">
+                    <video autoplay muted loop class="hero-video">
+                        <source src="videos/Xbox/Starfield.mp4" type="video/mp4">
+                    </video>
+                    <div class="hero-content">
+                        <div class="hero-logo">
+                            <img src="https://cdn2.steamgriddb.com/logo_thumb/8e587472451b51b565da42f01415effc.png" alt="Gears of War">
+                        </div>
+                        <h1>La Saga Continúa</h1>
+                        <p>Únete a Kait Diaz en su búsqueda para descubrir el origen de los Locust y los secretos familiares.</p>
+                        <button class="cta-button">Descubrir más</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Xbox Series X|S Games -->
+        <section class="xbox-section">
+            <video autoplay muted loop class="section-bg-video">
+                <source src="videos/Xbox/Horizoncorto.mp4" type="video/mp4">
+            </video>
+            <div class="xbox-overlay">
+                <div class="xbox-content">
+                    <h2>JUEGOS<br>INCREÍBLES EN<br>XBOX SERIES X|S</h2>
+                    <p>Experimenta velocidad y rendimiento de nueva generación con Quick Resume, tiempos de carga ultra rápidos y juegos optimizados.</p>
+                    <button class="explore-btn">Explorar juegos de Xbox</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Featured Games Carousel -->
+        <section class="featured-games">
+            <div class="container">
+                <h2 class="xbox-available-title">Juegos increíbles de Xbox ya disponibles</h2>
+                <div class="games-carousel">
+                    <button class="carousel-btn prev-btn" onclick="moveCarousel(-1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <div class="games-container">
+                        <div class="game-card">
+                            <img src="https://wallpapercave.com/wp/wp4813418.png" alt="Halo Infinite">
+                            <div class="game-info">
+                                <h3>Halo Infinite</h3>
+                                <p>Cuando toda esperanza se pierde y el destino de la humanidad cuelga de un hilo, el Jefe Maestro está listo para enfrentar al enemigo más implacable que haya conocido.</p>
+                                <button class="info-btn">Más información</button>
+                            </div>
+                        </div>
+                        
+                        <div class="game-card">
+                            <img src="https://image.api.playstation.com/vulcan/ap/rnd/202502/1900/631436cfbc1d64659c778e3783f29fafad6022145e0ffec8.jpg" alt="Forza Horizon 5">
+                            <div class="game-info">
+                                <h3>Forza Horizon 5</h3>
+                                <p>Tu aventura Horizon te espera. Explora los vibrantes y siempre cambiantes paisajes de mundo abierto de México con acción de conducción ilimitada y divertida.</p>
+                                <button class="info-btn">Más información</button>
+                            </div>
+                        </div>
+                        
+                        <div class="game-card">
+                            <img src="https://cdn.gearsofwar.com/gearsofwar/sites/2/2024/05/Gears5_thumbnail-664e4051d0100.png" alt="Gears 5">
+                            <div class="game-info">
+                                <h3>Gears 5</h3>
+                                <p>Del desarrollador de uno de los juegos más aclamados de esta generación, Gears 5 lleva a uno de los juegos más grandes, ambiciosos y hermosos hasta ahora.</p>
+                                <button class="info-btn">Más información</button>
+                            </div>
+                        </div>
+                        
+                        <div class="game-card">
+                            <img src="https://image.api.playstation.com/vulcan/ap/rnd/202402/1314/4446be4f7d07f6944cc7cb856f92685b224f4577c281f627.png" alt="Sea of Thieves">
+                            <div class="game-info">
+                                <h3>Sea of Thieves</h3>
+                                <p>Sea of Thieves ofrece la experiencia pirata definitiva, llena de aventuras, combates y sorpresas. Ya sea que estés navegando solo o en grupo.</p>
+                                <button class="info-btn">Más información</button>
+                            </div>
+                        </div>
+                        
+                        <div class="game-card">
+                            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1250410/capsule_616x353.jpg?t=1748576233" alt="Microsoft Flight Simulator">
+                            <div class="game-info">
+                                <h3>Microsoft Flight Simulator</h3>
+                                <p>Toma los controles de aviones desde aviones ligeros hasta aviones comerciales de fuselaje ancho en el simulador de vuelo más avanzado jamás creado.</p>
+                                <button class="info-btn">Más información</button>
+                            </div>
+                        </div>
+                        
+                        <div class="game-card">
+                            <img src="https://media.wired.com/photos/64efaed1d89817fe9d9fc046/master/pass/Starfield-Review-Featured-Games.jpg" alt="Starfield">
+                            <div class="game-info">
+                                <h3>Starfield</h3>
+                                <p>Starfield es el primer nuevo universo en más de 25 años de Bethesda Game Studios. Crea cualquier personaje que quieras y explora con libertad.</p>
+                                <button class="info-btn">Más información</button>
+                            </div>
+                        </div>
+                        
+                        <div class="game-card">
+                            <img src="https://media.vandal.net/m/7-2023/20237101734547_1.jpg" alt="FIFA 24">
+                            <div class="game-info">
+                                <h3>EA Sports FC 24</h3>
+                                <p>EA Sports FC 24 da la bienvenida a una nueva era del fútbol mundial: más de 19,000 jugadores completamente con licencia, más de 700 equipos y más de 30 ligas.</p>
+                                <button class="info-btn">Más información</button>
+                            </div>
+                        </div>
+
+                        <div class="game-card">
+                            <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3595230/03a32ef57a71955100af89dc40add1c4535fd813/capsule_616x353.jpg?t=1755227025" alt="Call of Duty">
+                            <div class="game-info">
+                                <h3>Call of Duty</h3>
+                                <p>Call of Duty regresa a sus raíces con Call of Duty: Modern Warfare, una experiencia reimaginada y actualizada para una nueva era.</p>
+                                <button class="info-btn">Más información</button>
+                            </div>
+                        </div>
+
+                        <div class="game-card">
+                            <img src="https://www.masgamers.com/wp-content/uploads/2022/04/image-1.png" alt="Age of Empires IV">
+                            <div class="game-info">
+                                <h3>Age of Empires IV</h3>
+                                <p>Age of Empires IV lleva a los jugadores a un viaje a través de los siglos mientras toman el control de varios personajes históricos.</p>
+                                <button class="info-btn">Más información</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-btn next-btn" onclick="moveCarousel(1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Xbox Available Games Carousel -->
+        <section class="xbox-available-section">
+            <div class="container">
+                <h2 class="xbox-available-title">Juegos increíbles de Xbox One ya disponibles</h2>
+                
+                <div class="xbox-available-carousel">
+                    <button class="carousel-btn prev-btn" onclick="moveXboxCarousel(-1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <div class="xbox-available-container">
+                        <div class="xbox-available-card" onclick="goToGameDetail('halo-infinite')">
+                            <img src="https://wallpapercave.com/wp/wp4813418.png" alt="Halo Infinite">
+                            <div class="card-info">
+                                <h3>Halo Infinite</h3>
+                                <p>La experiencia Halo más grande hasta ahora. El Jefe Maestro regresa cuando la humanidad se enfrenta a su hora más oscura.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="xbox-available-card featured-card" onclick="goToGameDetail('forza-horizon-5')">
+                            <img src="https://image.api.playstation.com/vulcan/ap/rnd/202502/1900/631436cfbc1d64659c778e3783f29fafad6022145e0ffec8.jpg" alt="Forza Horizon 5">
+                            <div class="card-info">
+                                <h3>Forza Horizon 5</h3>
+                                <p>Explora México en el festival de carreras más grande.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="xbox-available-card" onclick="goToGameDetail('gears-5')">
+                            <img src="https://cdn.gearsofwar.com/gearsofwar/sites/2/2024/05/Gears5_thumbnail-664e4051d0100.png" alt="Gears 5">
+                            <div class="card-info">
+                                <h3>Gears 5</h3>
+                                <p>La saga de Gears continúa con Kait Diaz.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="xbox-available-card" onclick="goToGameDetail('sea-of-thieves')">
+                            <img src="https://image.api.playstation.com/vulcan/ap/rnd/202402/1314/4446be4f7d07f6944cc7cb856f92685b224f4577c281f627.png" alt="Sea of Thieves">
+                            <div class="card-info">
+                                <h3>Sea of Thieves</h3>
+                                <p>La experiencia pirata definitiva te espera.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="xbox-available-card" onclick="goToGameDetail('flight-simulator')">
+                            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1250410/capsule_616x353.jpg?t=1748576233" alt="Microsoft Flight Simulator">
+                            <div class="card-info">
+                                <h3>Microsoft Flight Simulator</h3>
+                                <p>El simulador de vuelo más avanzado del mundo.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="xbox-available-card" onclick="goToGameDetail('starfield')">
+                            <img src="https://media.wired.com/photos/64efaed1d89817fe9d9fc046/master/pass/Starfield-Review-Featured-Games.jpg" alt="Starfield">
+                            <div class="card-info">
+                                <h3>Starfield</h3>
+                                <p>El nuevo universo de Bethesda Game Studios.</p>
+                            </div>
+                        </div>
+
+                        <div class="xbox-available-card" onclick="goToGameDetail('age-of-empires-iv')">
+                            <img src="https://www.masgamers.com/wp-content/uploads/2022/04/image-1.png" alt="Age of Empires IV">
+                            <div class="card-info">
+                                <h3>Age of Empires IV</h3>
+                                <p>Regresa la estrategia en tiempo real más épica.</p>
+                            </div>
+                        </div>
+
+                        <div class="xbox-available-card" onclick="goToGameDetail('call-of-duty-xbox')">
+                            <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3595230/03a32ef57a71955100af89dc40add1c4535fd813/capsule_616x353.jpg?t=1755227025" alt="Call of Duty">
+                            <div class="card-info">
+                                <h3>Call of Duty Modern Warfare</h3>
+                                <p>La guerra moderna ha regresado completamente reimaginada.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="xbox-available-card" onclick="goToGameDetail('minecraft-xbox')">
+                            <img src="https://blizzstoreperu.com/cdn/shop/products/comprarminecraftjavaybedrock_png.jpg?v=1659543980" alt="Minecraft">
+                            <div class="card-info">
+                                <h3>Minecraft</h3>
+                                <p>Construye, explora y sobrevive en mundos infinitos.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-btn next-btn" onclick="moveXboxCarousel(1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <div class="carousel-dots">
+                    <span class="dot active" onclick="goToXboxSlide(0)"></span>
+                    <span class="dot" onclick="goToXboxSlide(1)"></span>
+                    <span class="dot" onclick="goToXboxSlide(2)"></span>
+                    <span class="dot" onclick="goToXboxSlide(3)"></span>
+                    <span class="dot" onclick="goToXboxSlide(4)"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Xbox Game Pass -->
+        <section class="gamepass-section">
+            <div class="container">
+                <h2>Descubre Xbox Game Pass</h2>
+                
+                <p class="subtitle">
+                    Juega cientos de juegos de alta calidad con amigos en consola, PC, y en la nube. 
+                    Hay siempre algo nuevo que jugar con Game Pass.
+                </p>
+                
+                <div class="gamepass-image-container">
+                    <img src="https://cdn2.steamgriddb.com/logo_thumb/be7b0198a5f76478f2ff7a3dfe3defce.png" 
+                        alt="Xbox Game Pass" class="gamepass-image">
+                </div>
+                
+                <div class="gamepass-carousel">
+                    <button class="carousel-btn prev-btn" onclick="moveGamePassCarousel(-1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <div class="gamepass-container">
+                        <div class="gamepass-card">
+                            <img src="https://cdn2.steamgriddb.com/hero_thumb/c7aeec9bb7a36b06b5875e2300d8124e.jpg" alt="Game Pass Ultimate">
+                            <div class="gamepass-overlay">
+                                <h3>Xbox Game Pass Ultimate</h3>
+                                <p>Obtén cientos de juegos de alta calidad, multijugador online y EA Play, además de juegos en la nube para consola, PC y móvil.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gamepass-card">
+                            <img src="https://cdn2.steamgriddb.com/logo_thumb/1708d3d39aa496d7afcd8aa682b5342b.png" alt="Game Pass PC">
+                            <div class="gamepass-overlay">
+                                <h3>Xbox Game Pass para PC</h3>
+                                <p>Descubre cientos de juegos de PC de alta calidad, además de nuevos juegos el día de su lanzamiento. Únete a millones de jugadores.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gamepass-card">
+                            <img src="https://cdn2.steamgriddb.com/hero_thumb/d7fc40b7aab1fbd784d09b662f5b175b.jpg" alt="Game Pass Console">
+                            <div class="gamepass-overlay">
+                                <h3>Xbox Game Pass Console</h3>
+                                <p>Obtén acceso inmediato a más de 100 juegos de alta calidad en consola. Los nuevos juegos se agregan todo el tiempo.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gamepass-card">
+                            <img src="https://cdn2.steamgriddb.com/logo_thumb/1708d3d39aa496d7afcd8aa682b5342b.png" alt="Game Pass Cloud">
+                            <div class="gamepass-overlay">
+                                <h3>Xbox Cloud Gaming</h3>
+                                <p>Juega cientos de juegos en tu teléfono, tablet o laptop. No se requiere descarga, solo una conexión a internet.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-btn next-btn" onclick="moveGamePassCarousel(1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <button class="explore-all-plans" onclick="showNotification('Explorando todos los planes de Game Pass', 'info')">
+                    Explorar todos los planes
+                </button>
+            </div>
+        </section>
+    </section>
+
+    <!-- SECCIÓN SERIES X|S CON IMÁGENES REALES -->
+    <section id="section-series" class="content-section" style="display: none;">
+        <div class="container" style="padding: 120px 20px;">
+            <h1 style="color: #00ff41; margin-bottom: 40px; text-align: center;">Xbox Series X|S</h1>
+            <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 40px; text-align: center;">
+                La próxima generación de gaming
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px;">
+                <div style="background: linear-gradient(135deg, #107c10, #0e5e0e); padding: 40px; border-radius: 15px; text-align: center; border: 2px solid #00ff41;">
+                    <img src="https://oechsle.vteximg.com.br/arquivos/ids/19769374/imageUrl_1.jpg?v=638672468091570000" 
+                         alt="Xbox Series X" style="width: 100%; max-width: 250px; margin-bottom: 20px;">
+                    <h3 style="color: white; font-size: 1.8rem; margin-bottom: 20px;">Xbox Series X</h3>
+                    <p style="color: rgba(255,255,255,0.9); margin-bottom: 30px;">La consola más potente de Xbox con gráficos 4K y hasta 120 FPS</p>
+                    <p style="color: white; font-size: 2.5rem; font-weight: bold; margin-bottom: 20px;">$499<span style="font-size: 1rem;"></span></p>
+                    <button class="add-to-cart-btn" onclick="addToCart('xbox-series-x', 'Xbox Series X', 499.00, 'https://oechsle.vteximg.com.br/arquivos/ids/19769374/imageUrl_1.jpg?v=638672468091570000')">
+                        Añadir al carrito - $499.00
+                    </button>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #00ff41, #00cc33); padding: 40px; border-radius: 15px; text-align: center; transform: scale(1.05); box-shadow: 0 10px 40px rgba(0,0,0,0.3); border: 2px solid #000;">
+                    <img src="https://oechsle.vteximg.com.br/arquivos/ids/15472522/XBOX.jpg?v=638279132508700000" 
+                         alt="Xbox Series S" style="width: 100%; max-width: 250px; margin-bottom: 20px;">
+                    <h3 style="color: #000; font-size: 1.8rem; margin-bottom: 20px;">Xbox Series S</h3>
+                    <p style="color: rgba(0,0,0,0.8); margin-bottom: 30px;">Todo digital con el mismo rendimiento de nueva generación</p>
+                    <p style="color: #000; font-size: 2.5rem; font-weight: bold; margin-bottom: 20px;">$299<span style="font-size: 1rem;"></span></p>
+                    <button class="add-to-cart-btn" onclick="addToCart('xbox-series-s', 'Xbox Series S', 299.00, 'https://oechsle.vteximg.com.br/arquivos/ids/15472522/XBOX.jpg?v=638279132508700000')" 
+                            style="background: #000; color: #00ff41;">
+                        Añadir al carrito - $299.00
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN XBOX ONE -->
+    <section id="section-xbox-one" class="content-section" style="display: none;">
+        <div class="container" style="padding: 120px 20px;">
+            <h1 style="color: #00ff41; margin-bottom: 40px; text-align: center;">Xbox One</h1>
+            <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 40px; text-align: center;">
+                Juegos y contenido para Xbox One
+            </p>
+            
+            <div class="games-grid">
+                <div class="game-card">
+                    <img src="https://blizzstoreperu.com/cdn/shop/products/comprarminecraftjavaybedrock_png.jpg?v=1659543980" alt="Minecraft">
+                    <div class="game-info">
+                        <h3>Minecraft</h3>
+                        <p>Construye, explora y sobrevive</p>
+                        <button class="add-to-cart-btn" onclick="addToCart('minecraft-xboxone', 'Minecraft', 29.99, 'https://blizzstoreperu.com/cdn/shop/products/comprarminecraftjavaybedrock_png.jpg?v=1659543980')">Añadir - $29.99</button>
+                    </div>
+                </div>
+                
+                <div class="game-card">
+                    <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3595230/03a32ef57a71955100af89dc40add1c4535fd813/capsule_616x353.jpg?t=1755227025" alt="Call of Duty">
+                    <div class="game-info">
+                        <h3>Call of Duty Modern Warfare</h3>
+                        <p>Guerra moderna reimaginada</p>
+                        <button class="add-to-cart-btn" onclick="addToCart('cod-xboxone', 'Call of Duty Modern Warfare', 69.99, 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3595230/03a32ef57a71955100af89dc40add1c4535fd813/capsule_616x353.jpg?t=1755227025')">Añadir - $69.99</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN GAME PASS -->
+    <section id="section-game-pass" class="content-section" style="display: none;">
+        <div class="container" style="padding: 120px 20px;">
+            <h1 style="color: #00ff41; margin-bottom: 40px; text-align: center;">Xbox Game Pass</h1>
+            <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 60px; text-align: center;">
+                La mejor suscripción en gaming
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px;">
+                <div style="background: linear-gradient(135deg, #107c10, #0e5e0e); padding: 40px; border-radius: 15px; text-align: center;">
+                    <h3 style="color: white; font-size: 1.8rem; margin-bottom: 20px;">Game Pass Console</h3>
+                    <p style="color: rgba(255,255,255,0.9); margin-bottom: 30px;">Juega en tu Xbox</p>
+                    <p style="color: white; font-size: 2.5rem; font-weight: bold; margin-bottom: 20px;">$9.99<span style="font-size: 1rem;">/mes</span></p>
+                    <button onclick="openSubscriptionPaymentModal('Console')"
+        style="background: white; color: #107c10; border: none; padding: 15px 30px; 
+               border-radius: 25px; font-weight: bold; cursor: pointer;">
+    Suscribirse
+</button>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #00ff41, #00cc33); padding: 40px; border-radius: 15px; text-align: center; transform: scale(1.05); box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+                    <h3 style="color: #000; font-size: 1.8rem; margin-bottom: 20px;">Game Pass Ultimate</h3>
+                    <p style="color: rgba(0,0,0,0.8); margin-bottom: 30px;">Consola, PC y nube</p>
+                    <p style="color: #000; font-size: 2.5rem; font-weight: bold; margin-bottom: 20px;">$14.99<span style="font-size: 1rem;">/mes</span></p>
+                    <button onclick="openSubscriptionPaymentModal('Ultimate')"
+        style="background: #000; color: #00ff41; border: none; padding: 15px 30px; 
+               border-radius: 25px; font-weight: bold; cursor: pointer;">
+    Suscribirse
+</button>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #0e5e0e, #0a4a0a); padding: 40px; border-radius: 15px; text-align: center;">
+                    <h3 style="color: white; font-size: 1.8rem; margin-bottom: 20px;">Game Pass PC</h3>
+                    <p style="color: rgba(255,255,255,0.9); margin-bottom: 30px;">Juega en tu computadora</p>
+                    <p style="color: white; font-size: 2.5rem; font-weight: bold; margin-bottom: 20px;">$9.99<span style="font-size: 1rem;">/mes</span></p>
+                    <button onclick="openSubscriptionPaymentModal('PC')"
+        style="background: white; color: #0e5e0e; border: none; padding: 15px 30px; 
+               border-radius: 25px; font-weight: bold; cursor: pointer;">
+    Suscribirse
+</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN ACCESORIOS -->
+    <section id="section-accesorios" class="content-section" style="display: none;">
+        <div class="container" style="padding: 120px 20px;">
+            <h1 style="color: #00ff41; margin-bottom: 40px;">Accesorios Xbox</h1>
+            <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 40px;">Mejora tu experiencia de juego</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px;">
+                <div style="background: #1a1a1a; border-radius: 15px; overflow: hidden; border: 1px solid #333;">
+                    <img src="https://i5.walmartimages.com/seo/Microsoft-Xbox-Wireless-Controller-Robot-White_ca5ca095-c075-47ac-8903-61dbe9ee65c7.c0aca60f75a0e742f51b3c3896e346ed.jpeg" 
+                         alt="Xbox Controller" style="width: 100%; height: 250px; object-fit: cover;">
+                    <div style="padding: 20px;">
+                        <h3 style="color: #fff; margin-bottom: 10px;">Xbox Wireless Controller</h3>
+                        <p style="color: #aaa; margin-bottom: 15px;">Control inalámbrico con vibración mejorada</p>
+                        <p style="color: #00ff41; font-weight: bold; font-size: 1.3rem; margin-bottom: 15px;">$59.99</p>
+                        <button class="add-to-cart-btn" onclick="addToCart('xbox-controller', 'Xbox Wireless Controller', 59.99, 'https://i5.walmartimages.com/seo/Microsoft-Xbox-Wireless-Controller-Robot-White_ca5ca095-c075-47ac-8903-61dbe9ee65c7.c0aca60f75a0e742f51b3c3896e346ed.jpeg')">
+                            Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+                
+                <div style="background: #1a1a1a; border-radius: 15px; overflow: hidden; border: 1px solid #333;">
+                    <img src="https://http2.mlstatic.com/D_NQ_NP_688825-MPE86431022135_062025-O.webp" 
+                         alt="Xbox Headset" style="width: 100%; height: 250px; object-fit: cover;">
+                    <div style="padding: 20px;">
+                        <h3 style="color: #fff; margin-bottom: 10px;">Xbox Wireless Headset</h3>
+                        <p style="color: #aaa; margin-bottom: 15px;">Auriculares inalámbricos con sonido espacial</p>
+                        <p style="color: #00ff41; font-weight: bold; font-size: 1.3rem; margin-bottom: 15px;">$99.99</p>
+                        <button class="add-to-cart-btn" onclick="addToCart('xbox-headset', 'Xbox Wireless Headset', 99.99, 'https://http2.mlstatic.com/D_NQ_NP_688825-MPE86431022135_062025-O.webp')">
+                            Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div style="background: #1a1a1a; border-radius: 15px; overflow: hidden; border: 1px solid #333;">
+                    <img src="https://m.media-amazon.com/images/I/71274sGTXCL.jpg" 
+                         alt="Xbox Charging Station" style="width: 100%; height: 250px; object-fit: cover;">
+                    <div style="padding: 20px;">
+                        <h3 style="color: #fff; margin-bottom: 10px;">Xbox Charging Station</h3>
+                        <p style="color: #aaa; margin-bottom: 15px;">Carga dos controles simultáneamente</p>
+                        <p style="color: #00ff41; font-weight: bold; font-size: 1.3rem; margin-bottom: 15px;">$29.99</p>
+                        <button class="add-to-cart-btn" onclick="addToCart('xbox-charger', 'Xbox Charging Station', 29.99, 'https://m.media-amazon.com/images/I/71274sGTXCL.jpg')">
+                            Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN NOTICIAS -->
+    <section id="section-noticias" class="content-section" style="display: none;">
+        <div class="container" style="padding: 120px 20px;">
+            <h1 style="color: #00ff41; margin-bottom: 40px;">Noticias Xbox</h1>
+            <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 40px;">Mantente al día con las últimas novedades</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+                <div style="background: #1a1a1a; border-radius: 15px; overflow: hidden; border: 1px solid #333;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #107c10, #0e5e0e); display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-newspaper" style="font-size: 4rem; color: white;"></i>
+                    </div>
+                    <div style="padding: 20px;">
+                        <h3 style="color: #fff; margin-bottom: 10px;">Próximos Lanzamientos</h3>
+                        <p style="color: #aaa;">Descubre los juegos más esperados que llegarán pronto a Xbox</p>
+                    </div>
+                </div>
+
+                <div style="background: #1a1a1a; border-radius: 15px; overflow: hidden; border: 1px solid #333;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #00ff41, #00cc33); display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-trophy" style="font-size: 4rem; color: black;"></i>
+                    </div>
+                    <div style="padding: 20px;">
+                        <h3 style="color: #fff; margin-bottom: 10px;">Eventos y Torneos</h3>
+                        <p style="color: #aaa;">Participa en competiciones oficiales y eventos especiales</p>
+                    </div>
+                </div>
+
+                <div style="background: #1a1a1a; border-radius: 15px; overflow: hidden; border: 1px solid #333;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #0e5e0e, #0a4a0a); display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-gamepad" style="font-size: 4rem; color: white;"></i>
+                    </div>
+                    <div style="padding: 20px;">
+                        <h3 style="color: #fff; margin-bottom: 10px;">Actualizaciones</h3>
+                        <p style="color: #aaa;">Novedades y mejoras en tus juegos favoritos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN TIENDA -->
+    <section id="section-tienda" class="content-section" style="display: none;">
+        <div class="container" style="padding: 120px 20px;">
+            <h1 style="color: #00ff41; margin-bottom: 40px;">Xbox Store</h1>
+            <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 40px;">Explora todas nuestras ofertas y descuentos</p>
+            
+            <div style="background: linear-gradient(135deg, #107c10, #0e5e0e); padding: 60px 40px; border-radius: 20px; text-align: center; margin-bottom: 40px;">
+                <h2 style="color: white; font-size: 2.5rem; margin-bottom: 20px;">Ofertas de la Semana</h2>
+                <p style="color: rgba(255,255,255,0.9); font-size: 1.2rem; margin-bottom: 30px;">Hasta 70% de descuento en juegos seleccionados</p>
+                <button style="background: white; color: #107c10; border: none; padding: 15px 40px; border-radius: 25px; font-size: 1.1rem; font-weight: bold; cursor: pointer;">Ver Ofertas</button>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <div style="background: #1a1a1a; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #333;">
+                    <i class="fas fa-percent" style="color: #00ff41; font-size: 3rem; margin-bottom: 15px;"></i>
+                    <h3 style="color: #fff; margin-bottom: 10px;">Descuentos</h3>
+                    <p style="color: #aaa;">Hasta 70% OFF</p>
+                </div>
+
+                <div style="background: #1a1a1a; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #333;">
+                    <i class="fas fa-gift" style="color: #00ff41; font-size: 3rem; margin-bottom: 15px;"></i>
+                    <h3 style="color: #fff; margin-bottom: 10px;">Bundles</h3>
+                    <p style="color: #aaa;">Paquetes especiales</p>
+                </div>
+
+                <div style="background: #1a1a1a; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #333;">
+                    <i class="fas fa-star" style="color: #00ff41; font-size: 3rem; margin-bottom: 15px;"></i>
+                    <h3 style="color: #fff; margin-bottom: 10px;">Preventas</h3>
+                    <p style="color: #aaa;">Reserva ya</p>
+                </div>
+
+                <div style="background: #1a1a1a; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #333;">
+                    <i class="fas fa-clock" style="color: #00ff41; font-size: 3rem; margin-bottom: 15px;"></i>
+                    <h3 style="color: #fff; margin-bottom: 10px;">Ofertas Flash</h3>
+                    <p style="color: #aaa;">Por tiempo limitado</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN ASISTENCIA -->
+    <section id="section-asistencia" class="content-section" style="display: none;">
+        <div class="container" style="padding: 120px 20px;">
+            <h1 style="color: #00ff41; margin-bottom: 40px;">Soporte y Asistencia</h1>
+            <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 40px;">¿Necesitas ayuda? Estamos aquí para ti</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmin(250px, 1fr)); gap: 20px; margin-bottom: 40px;">
+                <div style="background: #1a1a1a; padding: 30px; border-radius: 10px; border: 1px solid #333;">
+                    <i class="fas fa-headset" style="color: #00ff41; font-size: 2rem; margin-bottom: 15px;"></i>
+                    <h3 style="color: #fff; margin-bottom: 10px;">Contacto</h3>
+                    <p style="color: #aaa;">Habla con nuestro equipo de soporte</p>
+                </div>
+                
+                <div style="background: #1a1a1a; padding: 30px; border-radius: 10px; border: 1px solid #333;">
+                    <i class="fas fa-question-circle" style="color: #00ff41; font-size: 2rem; margin-bottom: 15px;"></i>
+                    <h3 style="color: #fff; margin-bottom: 10px;">FAQ</h3>
+                    <p style="color: #aaa;">Preguntas frecuentes</p>
+                </div>
+
+                <div style="background: #1a1a1a; padding: 30px; border-radius: 10px; border: 1px solid #333;">
+                    <i class="fas fa-book" style="color: #00ff41; font-size: 2rem; margin-bottom: 15px;"></i>
+                    <h3 style="color: #fff; margin-bottom: 10px;">Guías</h3>
+                    <p style="color: #aaa;">Tutoriales y ayuda</p>
+                </div>
+
+                <div style="background: #1a1a1a; padding: 30px; border-radius: 10px; border: 1px solid #333;">
+                    <i class="fas fa-tools" style="color: #00ff41; font-size: 2rem; margin-bottom: 15px;"></i>
+                    <h3 style="color: #fff; margin-bottom: 10px;">Reparaciones</h3>
+                    <p style="color: #aaa;">Servicio técnico</p>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #00ff41, #00cc33); padding: 40px; border-radius: 15px; text-align: center;">
+                <h3 style="color: #000; font-size: 1.8rem; margin-bottom: 15px;">¿Necesitas ayuda inmediata?</h3>
+                <p style="color: rgba(0,0,0,0.8); margin-bottom: 25px;">Nuestro equipo está disponible 24/7</p>
+                <button style="background: #000; color: #00ff41; border: none; padding: 15px 35px; border-radius: 25px; font-weight: bold; cursor: pointer;">Chatear ahora</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="https://logos-world.net/wp-content/uploads/2020/11/Xbox-Logo.png" alt="Xbox">
+                </div>
+                <div class="footer-links">
+                    <p>&copy; 2025 Xbox Store. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ========================================
+     AGREGAR ANTES DEL CIERRE DE </body> en xbox.html
+     ======================================== -->
+
+<!-- Modal de Pago de Suscripción Xbox - REEMPLAZAR COMPLETAMENTE -->
+<div id="subscriptionPaymentModal" class="modal">
+    <div class="modal-content subscription-payment-modal">
+        <div class="modal-header">
+            <h2><i class="fas fa-crown"></i> Suscribirse a Xbox Game Pass</h2>
+            <span class="close" onclick="closeSubscriptionPaymentModal()">&times;</span>
+        </div>
+        
+        <div class="modal-body">
+            <!-- Información del Plan -->
+            <div id="planInfoDisplay"></div>
+            
+            <!-- Formulario -->
+            <form id="subscriptionPaymentForm" onsubmit="processSubscriptionPayment(event)">
+                <h3><i class="fas fa-credit-card"></i> Información de Pago</h3>
+                
+                <div class="form-group">
+                    <label for="subCardNumber">Número de Tarjeta</label>
+                    <input type="text" id="subCardNumber" 
+                           placeholder="1234 5678 9012 3456"
+                           maxlength="19"
+                           oninput="formatSubCardNumber(this)"
+                           required>
+                    <span class="field-error" id="subCardNumberError"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subCardName">Nombre en la Tarjeta</label>
+                    <input type="text" id="subCardName" 
+                           placeholder="JUAN PEREZ"
+                           required>
+                    <span class="field-error" id="subCardNameError"></span>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label for="subCardExpiry">Expiración</label>
+                        <input type="text" id="subCardExpiry" 
+                               placeholder="MM/AA"
+                               maxlength="5"
+                               oninput="formatSubCardExpiry(this)"
+                               required>
+                        <span class="field-error" id="subCardExpiryError"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subCardCVV">CVV</label>
+                        <input type="text" id="subCardCVV" 
+                               placeholder="123"
+                               maxlength="3"
+                               pattern="\d{3}"
+                               required>
+                        <span class="field-error" id="subCardCVVError"></span>
+                    </div>
+                </div>
+                
+                <!-- Resumen -->
+                <div class="subscription-summary">
+                    <h4>Resumen de Suscripción</h4>
+                    <div class="summary-row">
+                        <span>Plan:</span>
+                        <span id="summaryPlan">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Precio:</span>
+                        <span id="summaryPrice">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Descuento en juegos:</span>
+                        <span id="summaryDiscount" style="color: #00ff41;">-</span>
+                    </div>
+                    <div class="summary-total">
+                        <span>Total mensual:</span>
+                        <span id="summaryTotal">-</span>
+                    </div>
+                </div>
+                
+                <!-- Términos -->
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="acceptSubscriptionTerms" required>
+                        <span>Acepto los <a href="#" onclick="showSubscriptionTerms(event)">términos y condiciones</a></span>
+                    </label>
+                </div>
+                
+                <!-- Submit -->
+                <button type="submit" id="submitSubscriptionBtn">
+                    <span>Confirmar Suscripción</span>
+                    <span class="btn-loader"><i class="fas fa-spinner fa-spin"></i> Procesando...</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ESTILOS ADICIONALES PARA MODALES -->
+<style>
+/* Modal de Suscripción */
+.subscription-payment-modal {
+    max-width: 600px;
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    border: 2px solid #00ff41;
+}
+
+.plan-display-card {
+    background: linear-gradient(135deg, var(--plan-color-1), var(--plan-color-2));
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.plan-display-card h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.plan-display-card .plan-discount {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.plan-display-card .plan-price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #ccc;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.field-error {
+    display: block;
+    color: #f44336;
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+/* Botón de suscripción hover */
+#submitSubscriptionBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 255, 65, 0.5);
+}
+
+#submitSubscriptionBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+</style>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="subscription-manager.js"></script>
+    <script src="xbox.js"></script>
+    <script>
+        sessionStorage.setItem('currentPlatform', 'xbox.html');  
+    </script>
+</body>
+</html>

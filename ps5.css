@@ -1,0 +1,2396 @@
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #000;
+    color: #fff;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.header {
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid #333;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.nav-brand .logo {
+    height: 40px;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    margin-left: 70px;
+    margin-right: 15px;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.nav-link:hover {
+    color: #0070f3;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-input {
+    background: #333;
+    border: none;
+    padding: 8px 40px 8px 15px;
+    border-radius: 20px;
+    color: #fff;
+    width: 250px;
+}
+
+.search-input::placeholder {
+    color: #aaa;
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+.cart-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    position: relative;
+    padding: 8px;
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #0070f3;
+    color: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-btn {
+    background: #0070f3;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.login-btn:hover {
+    background: #0056b3;
+}
+
+/* Modal - CORREGIDO */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    overflow: auto; /* Permitir scroll si es necesario */
+}
+
+.modal-content {
+    background-color: #1a1a1a;
+    margin: 10% auto; /* Reducido de 15% a 10% */
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%; /* Más responsive */
+    max-width: 500px; /* Máximo ancho */
+    max-height: 80vh; /* Altura máxima */
+    position: relative;
+    overflow-y: auto; /* Scroll interno si es necesario */
+    /* Centrado mejorado */
+    transform: translateX(-50%);
+    margin-left: 50%;
+}
+
+/* Carrito específico - NUEVO */
+#cartModal .modal-content {
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#cartItems {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 400px; /* Altura máxima del contenido del carrito */
+    margin-bottom: 20px;
+}
+
+.cart-total {
+    border-top: 1px solid #333;
+    padding-top: 20px;
+    margin-top: auto; /* Empujar hacia abajo */
+    background: #1a1a1a; /* Mismo fondo para que no se pierda */
+    position: sticky;
+    bottom: 0;
+}
+
+/* Estilos para items del carrito - MEJORADO */
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 15px;
+    background: #2a2a2a;
+    border-radius: 8px;
+    border: 1px solid #333;
+    transition: background-color 0.3s ease;
+}
+
+.cart-item:hover {
+    background: #333;
+}
+
+.cart-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 15px;
+}
+
+.cart-item-info {
+    flex: 1;
+    margin-right: 15px;
+}
+
+.cart-item-info h4 {
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.cart-item-info p {
+    color: #0070f3;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.cart-item-controls button {
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.cart-quantity-btn {
+    width: 35px;
+    height: 35px;
+    background: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-quantity-btn:hover {
+    background: #0070f3;
+    transform: scale(1.1);
+}
+
+.cart-remove-btn {
+    padding: 8px 12px;
+    background: #d32f2f;
+    color: white;
+    font-size: 12px;
+}
+
+.cart-remove-btn:hover {
+    background: #b71c1c;
+    transform: scale(1.05);
+}
+
+.cart-quantity {
+    min-width: 30px;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    background: #444;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+/* Separador entre items - MEJORADO */
+.cart-separator {
+    margin: 15px 0;
+    border: none;
+    border-top: 1px solid #333;
+}
+
+/* Responsive para modal - MEJORADO */
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 5% auto;
+        width: 95%;
+        max-height: 90vh;
+        padding: 20px;
+    }
+    
+    #cartModal .modal-content {
+        max-height: 90vh;
+    }
+    
+    .cart-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+        padding: 15px;
+    }
+    
+    .cart-item img {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    
+    .cart-item-info {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    
+    .cart-item-controls {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        margin: 2% auto;
+        width: 98%;
+        max-height: 95vh;
+        padding: 15px;
+    }
+    
+    .cart-item-controls {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .cart-quantity-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+}
+
+.close:hover {
+    color: #fff;
+}
+
+.modal h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.modal input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    background: #333;
+    border: 1px solid #555;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.modal button {
+    width: 100%;
+    padding: 12px;
+    background: #0070f3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.modal button:hover {
+    background: #0056b3;
+}
+
+.empty-cart {
+    text-align: center;
+    color: #aaa;
+    padding: 20px;
+}
+
+.cart-total {
+    border-top: 1px solid #333;
+    padding-top: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 15px;
+    background: #0070f3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+.checkout-btn:disabled {
+    background: #555;
+    cursor: not-allowed;
+}
+
+/* Hero Section */
+.hero-section {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    margin-top: 3px;
+}
+
+.hero-carousel {
+    height: 100%;
+    position: relative;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.hero-slide.active {
+    opacity: 1;
+}
+
+.hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-content {
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 500px;
+    z-index: 10;
+}
+
+.hero-logo img {
+    max-height: 100px;
+    margin-bottom: 20px;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #ddd;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.cta-button {
+    background: linear-gradient(45deg, #ff6b00, #ff8500);
+    color: #fff;
+    border: none;
+    padding: 15px 35px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4);
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 0, 0.6);
+}
+
+/* PS5 Section */
+.ps5-section {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.section-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.ps5-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 20, 100, 0.9) 0%, rgba(0, 50, 150, 0.7) 50%, transparent 100%);
+    z-index: 2;
+}
+
+.ps5-content {
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 630px;
+    z-index: 3;
+}
+
+.ps5-content h2 {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    line-height: 1.1;
+    background: linear-gradient(45deg, #fff, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.ps5-content p {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    color: #ddd;
+    line-height: 1.6;
+}
+
+.explore-btn {
+    background: linear-gradient(45deg, #0070f3, #00a8ff);
+    color: #fff;
+    border: none;
+    padding: 15px 35px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 112, 243, 0.4);
+}
+
+.explore-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 112, 243, 0.6);
+}
+
+/* Featured Games Section */
+.featured-games {
+    padding: 100px 0;
+    background: linear-gradient(180deg, #000 0%, #1a1a1a 100%);
+}
+
+.games-carousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid #0070f3;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 10;
+    transition: all 0.3s;
+}
+
+.carousel-btn:hover {
+    background: #0070f3;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn {
+    left: -25px;
+}
+
+.next-btn {
+    right: -25px;
+}
+
+.games-container {
+    display: flex;
+    gap: 30px;
+    transition: transform 0.5s ease;
+    padding: 0 50px;
+}
+
+.game-card {
+    min-width: 300px;
+    background: #1a1a1a;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #333;
+}
+
+.game-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 112, 243, 0.2);
+}
+
+.game-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.game-info {
+    padding: 25px;
+}
+
+.game-info h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.game-info p {
+    color: #aaa;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.info-btn {
+    background: transparent;
+    color: #0070f3;
+    border: 2px solid #0070f3;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.info-btn:hover {
+    background: #0070f3;
+    color: #fff;
+}
+
+/* PS5 Available Games Section */
+.ps5-available-section {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #3a6bc7 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.ps5-available-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 60px;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.ps5-available-carousel {
+    position: relative;
+    overflow: visible;
+    margin: 0 50px;
+}
+
+.ps5-available-container {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    align-items: center;
+    padding: 20px 0;
+}
+
+.ps5-available-card {
+    flex-shrink: 0;
+    width: 280px;
+    height: 380px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 2px solid transparent;
+    backdrop-filter: blur(10px);
+    position: relative;
+}
+
+.ps5-available-card.featured-card {
+    width: 400px;
+    height: 450px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+}
+
+.ps5-available-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.ps5-available-card.featured-card:hover {
+    transform: translateY(-10px) scale(1.08);
+}
+
+.ps5-available-card img {
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.ps5-available-card:hover img {
+    transform: scale(1.1);
+}
+
+.card-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    padding: 30px 20px 20px;
+    color: #fff;
+}
+
+.card-info h3 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.featured-card .card-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+}
+
+.card-info p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.featured-card .card-info p {
+    font-size: 0.95rem;
+    -webkit-line-clamp: 3;
+}
+
+/* Carousel dots */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 40px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active,
+.dot:hover {
+    background: #fff;
+    transform: scale(1.2);
+}
+
+/* Carousel buttons specific for PS5 section */
+.ps5-available-carousel .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    color: #fff;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 10;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.ps5-available-carousel .carousel-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.8);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.ps5-available-carousel .prev-btn {
+    left: -30px;
+}
+
+.ps5-available-carousel .next-btn {
+    right: -30px;
+}
+
+/* PlayStation Plus Section */
+.ps-plus-section {
+    padding: 100px 0;
+    background: linear-gradient(45deg, #000 0%, #1a1a2e 50%, #16213e 100%);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 60px;
+    background: linear-gradient(45deg, #fff, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.ps-plus-carousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.plus-container {
+    display: flex;
+    gap: 30px;
+    transition: transform 0.5s ease;
+    padding: 0 50px;
+}
+
+.plus-card {
+    min-width: 350px;
+    height: 200px;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.plus-card:hover {
+    transform: scale(1.05);
+}
+
+.plus-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.plus-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    padding: 30px 20px 20px;
+    color: #fff;
+}
+
+.plus-overlay h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.plus-overlay p {
+    font-size: 0.9rem;
+    color: #ccc;
+    line-height: 1.4;
+}
+
+/* Footer */
+.footer {
+    background: #000;
+    padding: 50px 0 30px;
+    border-top: 1px solid #333;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-logo img {
+    height: 50px;
+}
+
+.footer-links p {
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .nav-menu {
+        display: none;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .ps5-content h2 {
+        font-size: 3rem;
+    }
+    
+    .games-container {
+        padding: 0 20px;
+    }
+    
+    .plus-container {
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px;
+    }
+    
+    .search-input {
+        width: 150px;
+    }
+    
+    .hero-content {
+        left: 20px;
+        max-width: calc(100% - 40px);
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+    }
+    
+    .ps5-content {
+        left: 20px;
+        max-width: calc(100% - 40px);
+    }
+    
+    .ps5-content h2 {
+        font-size: 2.5rem;
+    }
+    
+    .ps5-content p {
+        font-size: 1.1rem;
+    }
+    
+    .game-card {
+        min-width: 250px;
+    }
+    
+    .plus-card {
+        min-width: 280px;
+    }
+    
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+    
+    .prev-btn {
+        left: -20px;
+    }
+    
+    .next-btn {
+        right: -20px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        width: 90%;
+        margin: 20% auto;
+        padding: 20px;
+    }
+    
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .ps5-content h2 {
+        font-size: 2rem;
+    }
+    
+    .game-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.game-card, .game-tile, .plus-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0070f3;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0056b3;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Account Menu Styles */
+.account-menu {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 10px 0;
+    min-width: 180px;
+    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.account-menu-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+    color: #fff;
+    font-size: 14px;
+}
+
+.account-menu-item:hover {
+    background: #0070f3;
+}
+
+/* Responsive adjustments for auth */
+@media (max-width: 768px) {
+    .account-menu {
+        right: 10px;
+        min-width: 160px;
+    }
+}
+
+
+
+
+
+
+
+/* Estilos para botones de añadir al carrito */
+.add-to-cart-btn {
+    background: #0070f3;
+    color: white;
+    border: none;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s, transform 0.2s;
+    width: 100%;
+}
+
+.add-to-cart-btn:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
+
+.add-to-cart-btn:active {
+    transform: translateY(0);
+}
+
+/* Asegurar que los botones se muestren correctamente en las tarjetas de juego */
+.game-card {
+    position: relative;
+    overflow: visible;
+}
+
+.game-info {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Para las tarjetas del carrusel PS5 */
+.ps5-available-card .card-info {
+    padding: 20px;
+}
+
+.ps5-available-card .add-to-cart-btn {
+    margin-top: 15px;
+    background: rgba(0, 112, 243, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.ps5-available-card .add-to-cart-btn:hover {
+    background: rgba(0, 86, 179, 0.9);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .add-to-cart-btn {
+        padding: 8px 15px;
+        font-size: 12px;
+    }
+}
+
+
+/* Contenedor de la imagen de PlayStation Plus */
+.ps-plus-image-container {
+    background: white;
+    padding: 20px 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    display: inline-block;
+    margin: 0 auto 40px auto;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.ps-plus-image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.ps-plus-image-container:hover::before {
+    left: 100%;
+}
+
+.ps-plus-image-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Imagen de PlayStation Plus */
+.ps-plus-image {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0, 112, 210, 0.3));
+}
+
+/* Efectos adicionales opcionales */
+.ps-plus-image-container.glow {
+    box-shadow: 0 0 30px rgba(0, 112, 210, 0.4);
+    border: 2px solid #e0e0e0;
+}
+
+.ps-plus-image-container.rounded {
+    border-radius: 25px;
+}
+
+.ps-plus-image-container.minimal {
+    padding: 15px 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .ps-plus-image-container {
+        padding: 15px 30px;
+        margin-bottom: 30px;
+    }
+    
+    .ps-plus-image {
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ps-plus-image-container {
+        padding: 12px 25px;
+        margin-bottom: 25px;
+    }
+    
+    .ps-plus-image {
+        height: 40px;
+    }
+}
+
+/* ========================================
+   CORRECCIÓN 1: BOTONES DE CARRUSEL VISIBLES
+   ======================================== */
+
+/* Carrusel de juegos destacados */
+.featured-games .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 112, 243, 0.9);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 20; /* Aumentado para estar por encima de las tarjetas */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.featured-games .carousel-btn:hover {
+    background: rgba(0, 112, 243, 1);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 25px rgba(0, 112, 243, 0.4);
+}
+
+/* Posicionamiento fuera del contenedor */
+.featured-games .prev-btn {
+    left: -80px; /* Más alejado del contenedor */
+}
+
+.featured-games .next-btn {
+    right: -80px; /* Más alejado del contenedor */
+}
+
+/* Asegurar que el contenedor tenga espacio para los botones */
+.games-carousel {
+    position: relative;
+    overflow: visible; /* Cambiar de hidden a visible para mostrar botones */
+    margin: 0 100px; /* Añadir margen para dar espacio a los botones */
+}
+
+/* ========================================
+   CORRECCIÓN 2: SECCIÓN PLAYSTATION PLUS MEJORADA
+   ======================================== */
+
+.ps-plus-section {
+    padding: 120px 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Añadir elementos decorativos de fondo */
+.ps-plus-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 80%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 20s ease-in-out infinite;
+}
+
+.ps-plus-section::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 60%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 15s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+/* Contenedor principal mejorado */
+.ps-plus-section .container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+/* Título principal estilizado */
+.ps-plus-section h2 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    letter-spacing: -1px;
+}
+
+/* Subtítulo descriptivo */
+.ps-plus-section .subtitle {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 60px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+/* Contenedor de logo mejorado */
+.ps-plus-image-container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px 50px;
+    border-radius: 20px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    margin-bottom: 50px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.ps-plus-image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    transition: left 0.8s ease;
+}
+
+.ps-plus-image-container:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+}
+
+.ps-plus-image-container:hover::before {
+    left: 100%;
+}
+
+.ps-plus-image {
+    height: 70px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(0, 112, 210, 0.2));
+}
+
+/* Carrusel de planes mejorado */
+.ps-plus-carousel {
+    position: relative;
+    overflow: visible;
+    margin: 0 80px;
+}
+
+.plus-container {
+    display: flex;
+    gap: 30px;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    padding: 20px;
+}
+
+/* Tarjetas de planes rediseñadas */
+.plus-card {
+    min-width: 380px;
+    height: 280px;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.plus-card:hover {
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.plus-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.plus-card:hover img {
+    transform: scale(1.1);
+}
+
+/* Overlay mejorado */
+.plus-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(
+        0deg, 
+        rgba(0, 0, 0, 0.95) 0%, 
+        rgba(0, 0, 0, 0.7) 50%, 
+        transparent 100%
+    );
+    padding: 40px 25px 25px;
+    color: #fff;
+    backdrop-filter: blur(5px);
+}
+
+.plus-overlay h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.plus-overlay p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Botones del carrusel PlayStation Plus */
+.ps-plus-carousel .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 15;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.ps-plus-carousel .carousel-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.ps-plus-carousel .prev-btn {
+    left: -100px;
+}
+
+.ps-plus-carousel .next-btn {
+    right: -100px;
+}
+
+/* Botón de explorar todos los planes */
+.explore-all-plans {
+    background: linear-gradient(45deg, #fff, #f0f0f0);
+    color: #333;
+    border: none;
+    padding: 18px 40px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 40px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.explore-all-plans:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, #f8f8f8, #e0e0e0);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN MEJORADO
+   ======================================== */
+
+@media (max-width: 1200px) {
+    .games-carousel {
+        margin: 0 60px;
+    }
+    
+    .featured-games .prev-btn {
+        left: -50px;
+    }
+    
+    .featured-games .next-btn {
+        right: -50px;
+    }
+    
+    .ps-plus-carousel {
+        margin: 0 60px;
+    }
+    
+    .ps-plus-carousel .prev-btn {
+        left: -80px;
+    }
+    
+    .ps-plus-carousel .next-btn {
+        right: -80px;
+    }
+}
+
+@media (max-width: 768px) {
+    .games-carousel {
+        margin: 0 30px;
+    }
+    
+    .featured-games .carousel-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 16px;
+    }
+    
+    .featured-games .prev-btn {
+        left: -25px;
+    }
+    
+    .featured-games .next-btn {
+        right: -25px;
+    }
+    
+    .ps-plus-section h2 {
+        font-size: 2.5rem;
+    }
+    
+    .ps-plus-section .subtitle {
+        font-size: 1.1rem;
+        padding: 0 20px;
+    }
+    
+    .ps-plus-carousel {
+        margin: 0 30px;
+    }
+    
+    .ps-plus-carousel .carousel-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+    }
+    
+    .ps-plus-carousel .prev-btn {
+        left: -60px;
+    }
+    
+    .ps-plus-carousel .next-btn {
+        right: -60px;
+    }
+    
+    .plus-card {
+        min-width: 300px;
+        height: 240px;
+    }
+    
+    .plus-overlay h3 {
+        font-size: 1.3rem;
+    }
+    
+    .plus-overlay p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .games-carousel {
+        margin: 0 15px;
+    }
+    
+    .featured-games .prev-btn {
+        left: -15px;
+    }
+    
+    .featured-games .next-btn {
+        right: -15px;
+    }
+    
+    .ps-plus-section {
+        padding: 80px 0;
+    }
+    
+    .ps-plus-section h2 {
+        font-size: 2rem;
+    }
+    
+    .ps-plus-image-container {
+        padding: 20px 35px;
+        margin-bottom: 40px;
+    }
+    
+    .ps-plus-image {
+        height: 50px;
+    }
+    
+    .ps-plus-carousel {
+        margin: 0 15px;
+    }
+    
+    .ps-plus-carousel .prev-btn {
+        left: -40px;
+    }
+    
+    .ps-plus-carousel .next-btn {
+        right: -40px;
+    }
+    
+    .plus-card {
+        min-width: 260px;
+        height: 200px;
+    }
+    
+    .explore-all-plans {
+        padding: 15px 30px;
+        font-size: 14px;
+    }
+}
+
+
+/* Estilos para secciones de contenido */
+.content-section {
+    min-height: 100vh;
+    background: #000;
+    padding-top: 70px;
+}
+
+/* Estilo para enlace activo del nav */
+.nav-link.active {
+    color: #0070f3 !important;
+    position: relative;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #0070f3;
+}
+
+/* Transiciones suaves */
+.content-section {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Grid para catálogos */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+
+
+
+
+
+
+/*BARRA DE BUSQUEDA*/
+    .search-results {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 8px;
+        margin-top: 10px;
+        max-height: 400px;
+        overflow-y: auto;
+        z-index: 1000;
+        display: none;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    
+    .search-result-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 15px;
+        border-bottom: 1px solid #333;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    
+    .search-result-item:hover {
+        background: #0070f3;
+    }
+    
+    .search-result-item:last-child {
+        border-bottom: none;
+    }
+    
+    .search-result-image {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-right: 15px;
+    }
+    
+    .search-result-info {
+        flex: 1;
+    }
+    
+    .search-result-title {
+        color: white;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    
+    .search-result-price {
+        color: #0070f3;
+        font-weight: bold;
+    }
+    
+    .search-result-type {
+        background: #333;
+        color: #ccc;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        margin-left: 10px;
+    }
+    
+    .no-results {
+        padding: 20px;
+        text-align: center;
+        color: #666;
+    }
+    
+    .search-highlight {
+        background: yellow;
+        color: black;
+        padding: 2px 4px;
+        border-radius: 3px;
+    }
+
+
+
+    /* Anuncio de salud */
+.health-warning {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #1a1a1a;
+    border: 2px solid #0070f3;
+    border-radius: 10px;
+    padding: 0;
+    z-index: 9999;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: none;
+    max-width: 400px;
+    width: 90%;
+}
+
+.warning-content {
+    padding: 20px;
+    color: white;
+}
+
+.warning-content h3 {
+    color: #0070f3;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.warning-content p {
+    margin-bottom: 15px;
+    color: #ccc;
+}
+
+.warning-content ul {
+    margin: 15px 0;
+    padding-left: 20px;
+}
+
+.warning-content li {
+    margin-bottom: 8px;
+    color: #ddd;
+}
+
+.close-warning {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: #ccc;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.close-warning:hover {
+    color: #0070f3;
+}
+
+.warning-footer {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #333;
+    font-size: 0.9rem;
+}
+
+.warning-footer label {
+    color: #ccc;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.warning-footer input[type="checkbox"] {
+    margin: 0;
+}
+
+
+
+/* ========================================
+   SISTEMA DE SUSCRIPCIONES - ESTILOS
+   Agregar al final de ps5.css
+   ======================================== */
+
+/* Modal de Pago de Suscripción */
+.subscription-payment-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    overflow-y: auto;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.subscription-payment-content {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    margin: 3% auto;
+    padding: 0;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 20px 60px rgba(0, 112, 243, 0.3);
+    border: 1px solid #333;
+    position: relative;
+    animation: slideInDown 0.4s ease-out;
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close-subscription-payment {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    color: #aaa;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+    z-index: 10;
+}
+
+.close-subscription-payment:hover {
+    color: #0070f3;
+}
+
+/* Header del Modal */
+.payment-header {
+    background: linear-gradient(135deg, #0070f3 0%, #0056b3 100%);
+    padding: 25px 30px;
+    border-radius: 15px 15px 0 0;
+    text-align: center;
+    color: white;
+}
+
+.payment-header i {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    display: block;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.payment-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Información del Plan Seleccionado */
+.selected-plan-info {
+    padding: 25px 30px;
+    border-bottom: 1px solid #333;
+}
+
+.plan-display-card {
+    background: linear-gradient(135deg, var(--plan-color-1) 0%, var(--plan-color-2) 100%);
+    padding: 20px;
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+}
+
+.plan-display-card h3 {
+    font-size: 1.8rem;
+    margin: 0 0 10px 0;
+}
+
+.plan-display-card .plan-price {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.plan-display-card .plan-discount {
+    background: rgba(255, 255, 255, 0.2);
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Formulario */
+#subscriptionPaymentForm {
+    padding: 30px;
+}
+
+.payment-section {
+    margin-bottom: 25px;
+}
+
+.payment-section h3 {
+    color: #0070f3;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+}
+
+.payment-note {
+    background: rgba(0, 112, 243, 0.1);
+    border-left: 4px solid #0070f3;
+    padding: 12px 15px;
+    border-radius: 6px;
+    color: #ccc;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #ccc;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.form-group label i {
+    color: #0070f3;
+    margin-right: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    background: #2a2a2a;
+    border: 2px solid #444;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #0070f3;
+    background: #333;
+    box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
+}
+
+.form-group input::placeholder {
+    color: #666;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+}
+
+.field-error {
+    color: #ff4757;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: none;
+}
+
+.field-error.show {
+    display: block;
+}
+
+/* Resumen del Pago */
+.payment-summary {
+    background: #2a2a2a;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    border: 1px solid #333;
+}
+
+.payment-summary h3 {
+    color: #0070f3;
+    margin: 0 0 15px 0;
+    font-size: 1.1rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    color: #ccc;
+    font-size: 0.95rem;
+}
+
+.summary-value {
+    font-weight: 600;
+    color: white;
+}
+
+.summary-divider {
+    height: 1px;
+    background: #444;
+    margin: 10px 0;
+}
+
+.summary-row.total {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #0070f3;
+    padding-top: 15px;
+}
+
+.summary-row.total .summary-value {
+    color: #0070f3;
+}
+
+/* Términos y Condiciones */
+.terms-section {
+    margin-bottom: 25px;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    color: #ccc;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin-right: 12px;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.checkbox-text a {
+    color: #0070f3;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.checkbox-text a:hover {
+    text-decoration: underline;
+}
+
+/* Botón de Envío */
+.submit-subscription-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #0070f3 0%, #0056b3 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0, 112, 243, 0.4);
+}
+
+.submit-subscription-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 112, 243, 0.6);
+}
+
+.submit-subscription-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-loader {
+    margin-left: 10px;
+}
+
+.submission-note {
+    text-align: center;
+    color: #888;
+    font-size: 0.85rem;
+    margin-top: 15px;
+    line-height: 1.5;
+}
+
+/* Botones CTA de Suscripción */
+.subscription-cta-btn {
+    transition: all 0.3s ease !important;
+}
+
+.subscription-cta-btn:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Estados de Suscripción en Badge */
+.subscription-status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.subscription-status-badge.none {
+    background: #666;
+    color: white;
+}
+
+.subscription-status-badge.pending {
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+    color: white;
+    animation: pulse-pending 2s infinite;
+}
+
+@keyframes pulse-pending {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.subscription-status-badge.approved {
+    background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+    color: white;
+}
+
+.subscription-status-badge.rejected {
+    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+    color: white;
+}
+
+/* Badge de Suscripción Activa (Essential/Extra/Premium) */
+.active-subscription-badge.essential {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.active-subscription-badge.extra {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.active-subscription-badge.premium {
+    background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .subscription-payment-content {
+        width: 95%;
+        margin: 5% auto;
+    }
+    
+    #subscriptionPaymentForm {
+        padding: 20px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .payment-header h2 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .payment-header {
+        padding: 20px 15px;
+    }
+    
+    .selected-plan-info {
+        padding: 20px 15px;
+    }
+    
+    #subscriptionPaymentForm {
+        padding: 15px;
+    }
+    
+    .plan-display-card h3 {
+        font-size: 1.5rem;
+    }
+    
+    .plan-display-card .plan-price {
+        font-size: 1.6rem;
+    }
+}
+
+
+.subscription-badge.pending-change {
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%) !important;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+#planChangeNotice {
+    animation: slideInDown 0.5s ease-out;
+}
+
+@keyframes slideInDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+
+/*
+/* Animación de entrada del badge */
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Animación de pulso para solicitud pendiente */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+/* Badge de suscripción mejorado */
+.subscription-badge {
+    animation-fill-mode: both;
+}
+
+.subscription-badge.essential {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.subscription-badge.extra {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.subscription-badge.premium {
+    background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+
+.subscription-badge.pending {
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+}

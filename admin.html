@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - PlayStation Store</title>
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="https://cdn2.steamgriddb.com/logo_thumb/d2dd0c81db17acfecb071c0a32565677.png">
+</head>
+<body>
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="admin-nav">
+            <div class="admin-brand">
+                <img src="https://download.logo.wine/logo/PlayStation/PlayStation-Logo.wine.png" alt="PlayStation" class="admin-logo">
+                <h1>Panel de Administración</h1>
+            </div>
+            <div class="admin-user">
+                <span id="adminName">Administrador</span>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="admin-tabs">
+        <button class="tab-btn active" onclick="showTab('dashboard')" data-tab="dashboard">
+            <i class="fas fa-tachometer-alt"></i> Dashboard
+        </button>
+        <button class="tab-btn" onclick="showTab('orders')" data-tab="orders">
+            <i class="fas fa-shopping-bag"></i> Pedidos <span id="pendingOrdersCount" class="badge">0</span>
+        </button>
+        <button class="tab-btn" onclick="showTab('users')" data-tab="users">
+            <i class="fas fa-users"></i> Usuarios
+        </button>
+        <button class="tab-btn" onclick="showTab('subscriptions')" data-tab="subscriptions">
+            <i class="fas fa-crown"></i> Suscripciones <span id="pendingSubscriptionsCount" class="badge">0</span>
+        </button>
+        <button class="tab-btn" onclick="showTab('stats')" data-tab="stats">
+            <i class="fas fa-chart-bar"></i> Estadísticas
+        </button>
+        <button class="tab-btn" onclick="showTab('settings')" data-tab="settings">
+            <i class="fas fa-cog"></i> Configuración
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <!-- Dashboard Tab -->
+        <section id="dashboard" class="tab-content active">
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalOrders">0</h3>
+                        <p>Total Pedidos</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="pendingOrders">0</h3>
+                        <p>Pedidos Pendientes</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalUsers">0</h3>
+                        <p>Total Usuarios</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalRevenue">$0</h3>
+                        <p>Ingresos Totales</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-activity">
+                <h2>Actividad Reciente</h2>
+                <div id="recentActivity" class="activity-list">
+                    <!-- Activity items will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Orders Tab -->
+        <section id="orders" class="tab-content">
+            <div class="section-header">
+                <h2>Gestión de Pedidos</h2>
+                <div class="filter-controls">
+                    <select id="orderFilter" onchange="filterOrders()">
+                        <option value="all">Todos los pedidos</option>
+                        <option value="pending">Pendientes</option>
+                        <option value="confirmed">Confirmados</option>
+                        <option value="rejected">Rechazados</option>
+                        <option value="completed">Completados</option>
+                    </select>
+                    <button class="refresh-btn" onclick="loadOrders()">
+                        <i class="fas fa-refresh"></i> Actualizar
+                    </button>
+                </div>
+            </div>
+            
+            <div class="orders-container">
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>ID Pedido</th>
+                            <th>Cliente</th>
+                            <th>Email</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTableBody">
+                        <!-- Orders will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Users Tab -->
+        <section id="users" class="tab-content">
+            <div class="section-header">
+                <h2>Gestión de Usuarios</h2>
+                <div class="search-controls">
+                    <input type="text" id="userSearch" placeholder="Buscar usuario por email..." onkeyup="searchUsers()">
+                    <button class="secondary-btn" onclick="sendBulkNotification()" style="margin-right: 1rem;">
+                        <i class="fas fa-bullhorn"></i> Notificación Masiva
+                    </button>
+                    <button class="refresh-btn" onclick="loadUsers()">
+                        <i class="fas fa-refresh"></i> Actualizar
+                    </button>
+                </div>
+            </div>
+            
+            <div class="users-container">
+                <table class="users-table">
+                    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Fecha Registro</th>
+        <th>Última Conexión</th>
+        <th>Pedidos</th>
+        <th>Estado</th>
+        <th>Suscripción</th> <!-- ✅ NUEVO -->
+        <th>Acciones</th>
+    </tr>
+</thead>
+                    <tbody id="usersTableBody">
+                        <!-- Users will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+
+        <!-- Subscriptions Tab -->
+<!-- Subscriptions Tab - NUEVA VERSIÓN MULTI-PLATAFORMA -->
+<section id="subscriptions" class="tab-content">
+    <div class="section-header">
+        <h2>Gestión de Suscripciones Multi-Plataforma</h2>
+        <div class="filter-controls">
+            <select id="platformFilter" onchange="filterSubscriptionsByPlatform()">
+                <option value="all">Todas las plataformas</option>
+                <option value="ps5">🎮 PlayStation</option>
+                <option value="xbox">🎮 Xbox</option>
+            </select>
+            <select id="subscriptionStatusFilter" onchange="filterSubscriptionRequests()">
+                <option value="all">Todos los estados</option>
+                <option value="pending">Pendientes</option>
+                <option value="approved">Aprobadas</option>
+                <option value="rejected">Rechazadas</option>
+            </select>
+            <button class="refresh-btn" onclick="loadSubscriptionRequests()">
+                <i class="fas fa-refresh"></i> Actualizar
+            </button>
+        </div>
+    </div>
+    
+    <div class="subscriptions-container">
+        <table class="subscriptions-table">
+            <thead>
+                <tr>
+                    <th>Plataforma</th>
+                    <th>Usuario</th>
+                    <th>Email</th>
+                    <th>Plan Solicitado</th>
+                    <th>Precio</th>
+                    <th>Estado</th>
+                    <th>Fecha Solicitud</th>
+                    <th>Tarjeta (últimos 4)</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="subscriptionsTableBody">
+                <!-- Las solicitudes se cargarán aquí -->
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+
+        <!-- Statistics Tab -->
+        <section id="stats" class="tab-content">
+            <div class="stats-grid">
+                <div class="chart-container">
+                    <h3>Pedidos por Mes</h3>
+                    <canvas id="ordersChart"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <h3>Ingresos por Mes</h3>
+                    <canvas id="revenueChart"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <h3>Estados de Pedidos</h3>
+                    <canvas id="statusChart"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <h3>Registro de Usuarios</h3>
+                    <canvas id="usersChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Settings Tab -->
+        <section id="settings" class="tab-content">
+            <div class="settings-grid">
+                <div class="setting-card">
+                    <h3><i class="fas fa-bell"></i> Notificaciones</h3>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="emailNotifications" checked>
+                            Notificaciones por email
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="orderNotifications" checked>
+                            Notificar nuevos pedidos
+                        </label>
+                    </div>
+                    <button class="save-settings-btn" onclick="saveNotificationSettings()">
+                        Guardar Configuración
+                    </button>
+                </div>
+                
+                <div class="setting-card">
+                    <h3><i class="fas fa-database"></i> Base de Datos</h3>
+                    <div class="setting-item">
+                        <button class="danger-btn" onclick="exportData()">
+                            <i class="fas fa-download"></i> Exportar Datos
+                        </button>
+                    </div>
+                    <div class="setting-item">
+                        <button class="danger-btn" onclick="confirmDataCleanup()">
+                            <i class="fas fa-trash"></i> Limpiar Datos Antiguos
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="setting-card">
+                    <h3><i class="fas fa-shield-alt"></i> Seguridad</h3>
+                    <div class="setting-item">
+                        <label for="adminPassword">Cambiar Contraseña de Admin:</label>
+                        <input type="password" id="adminPassword" placeholder="Nueva contraseña">
+                        <button onclick="changeAdminPassword()">Cambiar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Order Detail Modal -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content order-modal">
+            <div class="modal-header">
+                <h2>Detalles del Pedido</h2>
+                <span class="close" onclick="closeOrderModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="orderDetails">
+                    <!-- Order details will be loaded here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="confirm-btn" onclick="confirmOrder()">
+                    <i class="fas fa-check"></i> Confirmar Pedido
+                </button>
+                <button class="reject-btn" onclick="rejectOrder()">
+                    <i class="fas fa-times"></i> Rechazar Pedido
+                </button>
+                <button class="complete-btn" onclick="completeOrder()" style="display: none;">
+                    <i class="fas fa-shipping-fast"></i> Marcar como Enviado
+                </button>
+                <button class="secondary-btn" onclick="sendCustomOrderNotification()">
+                    <i class="fas fa-paper-plane"></i> Enviar Notificación
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Detail Modal -->
+    <div id="userModal" class="modal">
+        <div class="modal-content user-modal">
+            <div class="modal-header">
+                <h2>Detalles del Usuario</h2>
+                <span class="close" onclick="closeUserModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="userDetails">
+                    <!-- User details will be loaded here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="danger-btn" onclick="blockUser()">
+                    <i class="fas fa-ban"></i> Bloquear Usuario
+                </button>
+                <button class="secondary-btn" onclick="sendEmailToUser()">
+                    <i class="fas fa-envelope"></i> Enviar Email
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Cargando...</p>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+
+    <!-- Subscription Request Detail Modal -->
+<div id="subscriptionRequestModal" class="modal">
+    <div class="modal-content subscription-modal">
+        <div class="modal-header">
+            <h2>Detalles de Solicitud de Suscripción</h2>
+            <span class="close" onclick="closeSubscriptionRequestModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div id="subscriptionRequestDetails">
+                <!-- Los detalles se cargarán aquí -->
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="confirm-btn" onclick="approveSubscriptionRequest()">
+                <i class="fas fa-check"></i> Aprobar Suscripción
+            </button>
+            <button class="reject-btn" onclick="rejectSubscriptionRequest()">
+                <i class="fas fa-times"></i> Rechazar Solicitud
+            </button>
+            <button class="secondary-btn" onclick="sendCustomSubscriptionNotification()">
+                <i class="fas fa-paper-plane"></i> Enviar Notificación
+            </button>
+        </div>
+    </div>
+</div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="subscription-manager.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

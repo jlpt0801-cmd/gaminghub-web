@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Juego - PlayStation Store</title>
+    <link rel="stylesheet" href="game-detail.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="https://cdn2.steamgriddb.com/logo_thumb/d2dd0c81db17acfecb071c0a32565677.png">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <a href="../ps5.html">
+                    <img src="https://cdn2.steamgriddb.com/logo_thumb/d2dd0c81db17acfecb071c0a32565677.png" alt="PlayStation" class="logo">
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="../ps5.html" class="nav-link">Juegos <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="../ps5.html" class="nav-link">PS5 <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="../ps5.html" class="nav-link">PS4 <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="../ps5.html" class="nav-link">Servicios <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="../ps5.html" class="nav-link">Accesorios <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="../ps5.html" class="nav-link">Noticias <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="../ps5.html" class="nav-link">Tienda <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="../ps5.html" class="nav-link">Asistencia <i class="fas fa-chevron-down"></i></a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="cart-btn" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                <button class="login-btn" onclick="redirectToAuth()">Iniciar sesión</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="toggleCart()">&times;</span>
+            <h2>Carrito de Compras</h2>
+            <div id="cartItems">
+                <p class="empty-cart">Tu carrito está vacío</p>
+            </div>
+            <div class="cart-total">
+                <h3>Total: $<span id="cartTotal">0.00</span></h3>
+                <button class="checkout-btn" disabled>Proceder al Pago</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección 1: Hero con video de fondo -->
+    <section class="hero-section">
+        <div class="hero-video-container">
+            <video autoplay muted loop class="hero-video" id="hero-video">
+                <source src="" id="video-source" type="video/mp4">
+                <!-- Video alternativo si no se encuentra el archivo -->
+            </video>
+            <div class="hero-overlay"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="game-logo">
+                <img src="" alt="" id="game-logo">
+            </div>
+            
+            <div class="game-info">
+                <h1 class="game-title" id="game-title">Cargando...</h1>
+                <p class="game-developer" id="game-developer"></p>
+                
+                <div class="platforms" id="platforms">
+                    <!-- Se llena con JS -->
+                </div>
+                
+                <div class="price-section">
+                    <div class="price" id="game-price">$0.00</div>
+                    <button class="add-to-cart-btn" onclick="addToCart()">
+                        <i class="fas fa-shopping-cart"></i> Añadir al carrito
+                    </button>
+                </div>
+                
+                <div class="release-info" id="release-info">
+                    <!-- Se llena con JS -->
+                </div>
+                
+                <div class="content-rating" id="content-rating">
+                    <!-- Se llena con JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 2: Descripción del juego -->
+    <section class="description-section">
+        <div class="description-bg" id="description-bg"></div>
+        <div class="container">
+            <div class="description-content">
+                <h2 id="description-title">DESCRIPCIÓN DEL JUEGO</h2>
+                <h3 id="description-subtitle">Cargando...</h3>
+                <div id="description-text">
+                    <!-- Se llena con JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 3: Características principales -->
+    <section class="features-section">
+        <div class="container">
+            <h2 id="features-title">Características principales</h2>
+            <div class="features-grid" id="features-grid">
+                <!-- Se llena con JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="https://cdn2.steamgriddb.com/logo_thumb/d2dd0c81db17acfecb071c0a32565677.png" alt="PlayStation">
+                </div>
+                <div class="footer-links">
+                    <p>&copy; 2025 PlayStation Store. Todos los derechos reservados.</p>
+                    <p id="game-trademark"></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="game-detail.js"></script>
+    <script>
+        // Cargar datos específicos del juego basado en la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const gameId = urlParams.get('id') || 'spider-man';
+        loadGameData(gameId);
+    </script>
+</body>
+</html>

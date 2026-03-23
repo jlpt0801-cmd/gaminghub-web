@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Platform Selector</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="https://cdn2.steamgriddb.com/logo_thumb/d2dd0c81db17acfecb071c0a32565677.png">
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <!-- Elementos de audio ocultos para reproducir sonidos únicos -->
+    <audio id="playstation-sound" preload="auto">
+        <source src="Audios/Gow.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="xbox-sound" preload="auto">
+        <source src="Audios/Halo.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="nintendo-sound" preload="auto">
+        <source src="Audios/Mario.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="container">
+        <header>
+            <h1>ELIGE TU PLATAFORMA</h1>
+            <h2>Experimenta el gaming como nunca antes</h2>
+        </header>
+        
+        <div class="platforms">
+            <div class="platform-card" id="playstation" data-sound="playstation-sound" data-page="ps5.html">
+                <div class="platform-overlay"></div>
+                <div class="platform-content">
+                    <div class="logo-container">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Playstation_logo_colour.svg/1280px-Playstation_logo_colour.svg.png" alt="PlayStation" class="platform-logo">
+                    </div>
+                    <h3>PLAYSTATION</h3>
+                    <p>Explora el mundo de PlayStation</p>
+                </div>
+            </div>
+            
+            <div class="platform-card" id="xbox" data-sound="xbox-sound" data-page="xbox.html">
+                <div class="platform-overlay"></div>
+                <div class="platform-content">
+                    <div class="logo-container">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Xbox_one_logo.svg/1024px-Xbox_one_logo.svg.png" alt="Xbox" class="platform-logo">
+                    </div>
+                    <h3>XBOX</h3>
+                    <p>Descubre la experiencia Xbox</p>
+                </div>
+            </div>
+            
+            <div class="platform-card" id="nintendo" data-sound="nintendo-sound" data-page="nintendo.html">
+                <div class="platform-overlay"></div>
+                <div class="platform-content">
+                    <div class="logo-container">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Nintendo.svg/1024px-Nintendo.svg.png" alt="Nintendo" class="platform-logo">
+                    </div>
+                    <h3>NINTENDO</h3>
+                    <p>Adéntrate en el universo Nintendo</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>MODO CLÁSICO • GAMINGHUB</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nintendo Store</title>
+    <link rel="stylesheet" href="nintendo.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="https://logos-world.net/wp-content/uploads/2020/11/Nintendo-Logo.png">
+</head>
+<body>
+        <!-- Anuncio de advertencia pequeño -->
+<div id="healthWarning" class="health-warning">
+    <div class="warning-content">
+        <span class="close-warning" onclick="closeHealthWarning()">×</span>
+        <h3>🕹️ ¡Juega con Responsabilidad!</h3>
+        <p>El exceso de gaming puede ser perjudicial para tu salud. Recuerda:</p>
+        <ul>
+            <li>⏰ Tomar descansos regulares</li>
+            <li>👀 Cuidar tu vista</li>
+            <li>💺 Mantener una postura correcta</li>
+            <li>⚖️ Balancear con otras actividades</li>
+        </ul>
+        <div class="warning-footer">
+            <label>
+                <input type="checkbox" id="dontShowAgain"> No mostrar este mensaje nuevamente
+            </label>
+        </div>
+    </div>
+</div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <img src="https://logos-world.net/wp-content/uploads/2020/11/Nintendo-Logo.png" alt="Nintendo" class="logo">
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link">Inicio <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="#" class="nav-link">Nintendo Switch <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="#" class="nav-link">Nintendo 3DS <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="#" class="nav-link">Nintendo Online <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="#" class="nav-link">Accesorios <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="#" class="nav-link">Noticias <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="#" class="nav-link">Tienda <i class="fas fa-chevron-down"></i></a></li>
+                <li><a href="#" class="nav-link">Asistencia <i class="fas fa-chevron-down"></i></a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <div class="search-container">
+                    <input type="text" placeholder="Buscar juegos..." class="search-input" id="searchInput">
+                    <i class="fas fa-search search-icon"></i>
+                    <div id="searchResults" class="search-results"></div>
+                </div>
+                <button class="cart-btn" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                <div class="user-menu">
+                    <button class="login-btn" onclick="redirectToAuth()">Iniciar sesión</button>
+                    <div class="user-dropdown" id="userDropdown" style="display: none;">
+                        <div class="dropdown-item" onclick="viewProfile()">
+                            <i class="fas fa-user"></i>
+                            Mi Perfil
+                        </div>
+                        <div class="dropdown-item" onclick="viewOrderHistory()">
+                            <i class="fas fa-history"></i>
+                            Historial de Pedidos
+                        </div>
+                        <div class="dropdown-item" onclick="viewWishlist()">
+                            <i class="fas fa-heart"></i>
+                            Lista de Deseos
+                        </div>
+                        <div class="dropdown-item" onclick="viewSettings()">
+                            <i class="fas fa-cog"></i>
+                            Configuración
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item logout-item" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Cerrar Sesión
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Carrito de Compras</h2>
+                <span class="close" onclick="toggleCart()">&times;</span>
+            </div>
+            <div id="cartItems">
+                <p class="empty-cart">Tu carrito está vacío</p>
+            </div>
+            <div class="cart-total">
+                <h3>Total: $<span id="cartTotal">0.00</span></h3>
+                <button class="checkout-btn" disabled>Proceder al Pago</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN PRINCIPAL (CONTENIDO POR DEFECTO) -->
+    <section id="section-principal" class="content-section" style="display: block;">
+        <!-- Section 1: Hero Carousel -->
+        <section class="hero-section">
+            <div class="hero-carousel">
+                <div class="hero-slide active">
+                    <video autoplay muted loop class="hero-video">
+                        <source src="videos/Nintendo/MarioKart.mp4" type="video/mp4">
+                    </video>
+                    <div class="hero-content">
+                        <div class="hero-logo">
+                            <img src="https://cdn2.steamgriddb.com/logo_thumb/9d4ab7e058d08362d5afd12b6d4e146c.png" alt="Super Mario">
+                        </div>
+                        <h1>¡Es hora de saltar!</h1>
+                        <p>Únete a Mario en su aventura más épica. Explora mundos coloridos y vive la magia de Nintendo Switch.</p>
+                        <button class="cta-button">¡Jugar ahora!</button>
+                    </div>
+                </div>
+                
+                <div class="hero-slide">
+                    <video autoplay muted loop class="hero-video">
+                        <source src="videos/Nintendo/Zelda.mp4" type="video/mp4">
+                    </video>
+                    <div class="hero-content">
+                        <div class="hero-logo">
+                            <img src="https://cdn2.steamgriddb.com/logo_thumb/f2669241f7cca3f1306082b7a9f458ed.png" alt="The Legend of Zelda">
+                        </div>
+                        <h1>La aventura te espera</h1>
+                        <p>Explora Hyrule como nunca antes en The Legend of Zelda. Una aventura épica llena de misterios por descubrir.</p>
+                        <button class="cta-button">Descubrir Hyrule</button>
+                    </div>
+                </div>
+                
+                <div class="hero-slide">
+                    <video autoplay muted loop class="hero-video">
+                        <source src="videos/Nintendo/Pokemon.mp4" type="video/mp4">
+                    </video>
+                    <div class="hero-content">
+                        <div class="hero-logo">
+                            <img src="https://cdn2.steamgriddb.com/logo_thumb/bd47b416cb254beec42c7b23a64dde5a.png" alt="Pokémon">
+                        </div>
+                        <h1>¡Gotta Catch 'Em All!</h1>
+                        <p>Conviértete en el mejor entrenador Pokémon. Captura, entrena y batalla en la aventura definitiva.</p>
+                        <button class="cta-button">Comenzar aventura</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Nintendo Switch Games -->
+        <section class="nintendo-section">
+            <video autoplay muted loop class="section-bg-video">
+                <source src="videos/Nintendo/MarioKart.mp4" type="video/mp4">
+            </video>
+            <div class="nintendo-overlay">
+                <div class="nintendo-content">
+                    <h2>JUEGOS<br>INCREÍBLES EN<br>NINTENDO SWITCH</h2>
+                    <p>Disfruta de la experiencia de juego más versátil. En casa o en movimiento, Nintendo Switch se adapta a tu estilo de vida.</p>
+                    <button class="explore-btn">Explorar juegos de Nintendo</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Featured Games Carousel -->
+        <section class="featured-games">
+            <div class="container">
+                <h2 class="nintendo-available-title">Juegos increíbles de Nintendo ya disponibles</h2>
+                <div class="games-carousel">
+                    <button class="carousel-btn prev-btn" onclick="moveCarousel(-1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <div class="games-container">
+                        <div class="game-card">
+                            <img src="https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000001130/c42553b4fd0312c31e70ec7468c6c9bccd739f340152925b9600631f2d29f8b5" alt="Super Mario Odyssey">
+                            <div class="game-info">
+                                <h3>Super Mario Odyssey</h3>
+                                <p>Únete a Mario en una aventura masiva en 3D por el mundo. Utiliza las increíbles habilidades nuevas de Mario para recolectar Power Moons.</p>
+                                <button class="info-btn">Más información</button>
+                            </div>
+                        </div>
+                        
+                        <div class="game-card">
+                            <img src="https://www.nintendo.com/eu/media/images/10_share_images/games_15/wiiu_14/SI_WiiU_TheLegendOfZeldaBreathOfTheWild_image1600w.jpg" alt="The Legend of Zelda: Breath of the Wild">
+                            <div class="game-info">
+                                <h3>The Legend of Zelda: Breath of the Wild</h3>
+                                <p>Olvida todo lo que sabes sobre los juegos de The Legend of Zelda. Entra en un mundo de descubrimiento, exploración y aventura.</p>
+                                <button class="info-btn">Más información</button>
+                            </div>
+                        </div>
+                        
+                        <div class="game-card">
+                            <img src="https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000039945/dcb496d7cf954c7eb51ab2e5d0c27918fb7f055e50f4e902135bd4a70a44b491" alt="Pokémon Legends: Arceus">
+                            <div class="game-info">
+                                <h3>Pokémon Legends: Arceus</h3>
+                                <p>Embárcate en encuestas para completar la primera Pokédex de la región de Hisui. Tu trabajo será capturar y estudiar Pokémon salvajes.</p>
+                                <button class="info-btn">Más información</button>
+                            </div>
+                        </div>
+                        
+                        <div class="game-card">
+                            <img src="https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000027619/9989957eae3a6b545194c42fec2071675c34aadacd65e6b33fdfe7b3b6a86c3a" alt="Animal Crossing: New Horizons">
+                            <div class="game-info">
+                                <h3>Animal Crossing: New Horizons</h3>
+                                <p>Si alguna vez has soñado con tener una isla paradisíaca para ti solo, tu sueño está a punto de hacerse realidad.</p>
+                                <button class="info-btn">Más información</button>
+                            </div>
+                        </div>
+                        
+                        <div class="game-card">
+                            <img src="https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000012332/ac4d1fc9824876ce756406f0525d50c57ded4b2a666f6dfe40a6ac5c3563fad9" alt="Super Smash Bros. Ultimate">
+                            <div class="game-info">
+                                <h3>Super Smash Bros. Ultimate</h3>
+                                <p>¡Los luchadores más grandes de Nintendo se enfrentan en la batalla definitiva! Con nuevos luchadores, nuevos escenarios y nuevos modos de juego.</p>
+                                <button class="info-btn">Más información</button>
+                            </div>
+                        </div>
+                        
+                        <div class="game-card">
+                            <img src="https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000000153/de697f487a36d802dd9a5ff0341f717c8486221f2f1219b675af37aca63bc453" alt="Mario Kart 8 Deluxe">
+                            <div class="game-info">
+                                <h3>Mario Kart 8 Deluxe</h3>
+                                <p>¡Acelera por pistas coloridas llenas de obstáculos! Con personajes nuevos, objetos nuevos y opciones para personalizar tu kart.</p>
+                                <button class="info-btn">Más información</button>
+                            </div>
+                        </div>
+                        
+                        <div class="game-card">
+                            <img src="https://assets.nintendo.com/image/upload/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000046395/4555efa9f2061f7d1e1646ab3d3af790a7491270b1b3e32e730273e9ac096827" alt="Splatoon 3">
+                            <div class="game-info">
+                                <h3>Splatoon 3</h3>
+                                <p>¡Entra en el caótico mundo de Splatoon! Sumérgete en batallas 4v4 donde la tinta es tu arma y creatividad tu estrategia.</p>
+                                <button class="info-btn">Más información</button>
+                            </div>
+                        </div>
+
+                        <div class="game-card">
+                            <img src="https://www.nintendolink.com/wp-content/uploads/2021/10/share-fb.jpg" alt="Metroid Dread">
+                            <div class="game-info">
+                                <h3>Metroid Dread</h3>
+                                <p>Samus está de vuelta en una aventura llena de acción en 2D. Explora un mundo alienígena misterioso en esta secuela épica.</p>
+                                <button class="info-btn">Más información</button>
+                            </div>
+                        </div>
+
+                        <div class="game-card">
+                            <img src="https://m.media-amazon.com/images/I/91vd7WQ1acL.jpg" alt="Kirby and the Forgotten Land">
+                            <div class="game-info">
+                                <h3>Kirby and the Forgotten Land</h3>
+                                <p>Únete a Kirby en una aventura en 3D a través de un mundo misterioso. Usa las nuevas habilidades de Kirby para explorar cada rincón.</p>
+                                <button class="info-btn">Más información</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-btn next-btn" onclick="moveCarousel(1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Nintendo Available Games Carousel -->
+        <section class="nintendo-available-section">
+            <div class="container">
+                <h2 class="nintendo-available-title">Juegos increíbles de Nintendo Switch ya disponibles</h2>
+                
+                <div class="nintendo-available-carousel">
+                    <button class="carousel-btn prev-btn" onclick="moveNintendoCarousel(-1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <div class="nintendo-available-container" id="nintendoCarouselContainer">
+                        <div class="nintendo-available-card" onclick="goToGameDetail('super-mario-odyssey')">
+                            <img src="https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000001130/c42553b4fd0312c31e70ec7468c6c9bccd739f340152925b9600631f2d29f8b5" alt="Super Mario Odyssey">
+                            <div class="card-info">
+                                <h3>Super Mario Odyssey</h3>
+                                <p>Únete a Mario en una aventura masiva en 3D por el mundo. Utiliza las increíbles habilidades nuevas de Mario.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="nintendo-available-card" onclick="goToGameDetail('zelda-breath-wild')">
+                            <img src="https://www.nintendo.com/eu/media/images/10_share_images/games_15/wiiu_14/SI_WiiU_TheLegendOfZeldaBreathOfTheWild_image1600w.jpg" alt="Zelda: Breath of the Wild">
+                            <div class="card-info">
+                                <h3>The Legend of Zelda: Breath of the Wild</h3>
+                                <p>Entra en un mundo de descubrimiento, exploración y aventura en Hyrule.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="nintendo-available-card" onclick="goToGameDetail('pokemon-arceus')">
+                            <img src="https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000039945/dcb496d7cf954c7eb51ab2e5d0c27918fb7f055e50f4e902135bd4a70a44b491" alt="Pokémon Legends: Arceus">
+                            <div class="card-info">
+                                <h3>Pokémon Legends: Arceus</h3>
+                                <p>Completa la primera Pokédex de la región de Hisui capturando Pokémon salvajes.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="nintendo-available-card" onclick="goToGameDetail('animal-crossing')">
+                            <img src="https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000027619/9989957eae3a6b545194c42fec2071675c34aadacd65e6b33fdfe7b3b6a86c3a" alt="Animal Crossing">
+                            <div class="card-info">
+                                <h3>Animal Crossing: New Horizons</h3>
+                                <p>Crea tu isla paradisíaca perfecta y vive la vida de tus sueños.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="nintendo-available-card" onclick="goToGameDetail('smash-bros')">
+                            <img src="https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000012332/ac4d1fc9824876ce756406f0525d50c57ded4b2a666f6dfe40a6ac5c3563fad9" alt="Super Smash Bros. Ultimate">
+                            <div class="card-info">
+                                <h3>Super Smash Bros. Ultimate</h3>
+                                <p>Los luchadores más grandes de Nintendo en la batalla definitiva.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="nintendo-available-card" onclick="goToGameDetail('mario-kart-8')">
+                            <img src="https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000000153/de697f487a36d802dd9a5ff0341f717c8486221f2f1219b675af37aca63bc453" alt="Mario Kart 8 Deluxe">
+                            <div class="card-info">
+                                <h3>Mario Kart 8 Deluxe</h3>
+                                <p>Acelera por pistas coloridas con personajes y objetos nuevos.</p>
+                            </div>
+                        </div>
+
+                        <div class="nintendo-available-card" onclick="goToGameDetail('splatoon-3')">
+                            <img src="https://assets.nintendo.com/image/upload/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000046395/4555efa9f2061f7d1e1646ab3d3af790a7491270b1b3e32e730273e9ac096827" alt="Splatoon 3">
+                            <div class="card-info">
+                                <h3>Splatoon 3</h3>
+                                <p>Entra en batallas 4v4 donde la tinta es tu arma y creatividad tu estrategia.</p>
+                            </div>
+                        </div>
+
+                        <div class="nintendo-available-card" onclick="goToGameDetail('metroid-dread')">
+                            <img src="https://www.nintendolink.com/wp-content/uploads/2021/10/share-fb.jpg" alt="Metroid Dread">
+                            <div class="card-info">
+                                <h3>Metroid Dread</h3>
+                                <p>Samus regresa en una aventura llena de acción en 2D por un mundo alienígena.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="nintendo-available-card" onclick="goToGameDetail('kirby-forgotten')">
+                            <img src="https://m.media-amazon.com/images/I/91vd7WQ1acL.jpg" alt="Kirby and the Forgotten Land">
+                            <div class="card-info">
+                                <h3>Kirby and the Forgotten Land</h3>
+                                <p>Aventura en 3D con Kirby a través de un mundo misterioso y colorido.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-btn next-btn" onclick="moveNintendoCarousel(1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <!-- Carousel dots indicator -->
+                <div class="carousel-dots" id="carouselDots">
+                    <!-- Los puntos se generan dinámicamente -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Nintendo Switch Online -->
+        <section class="nintendo-online-section">
+            <div class="container">
+                <!-- Título principal -->
+                <h2>Descubre Nintendo Switch Online</h2>
+                
+                <!-- Subtítulo descriptivo -->
+                <p class="subtitle">
+                    Juega en línea, accede a una creciente colección de juegos clásicos de NES y Super NES, 
+                    y disfruta de ventajas exclusivas para miembros.
+                </p>
+                
+                <!-- Imagen del logo Nintendo Switch Online -->
+                <div class="nintendo-online-image-container">
+                    <img src="https://cdn2.steamgriddb.com/logo_thumb/f862b39f767d3a1991bdeb2ea1401c9c.png" 
+                        alt="Nintendo Switch Online" class="nintendo-online-image">
+                </div>
+                
+                <div class="nintendo-online-carousel">
+                    <button class="carousel-btn prev-btn" onclick="moveNintendoOnlineCarousel(-1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <div class="nintendo-online-container">
+                        <div class="nintendo-online-card">
+                            <img src="https://cdn2.steamgriddb.com/hero_thumb/423baa07343c710e5b92d18010c3fd38.jpg" alt="Nintendo Switch Online Individual">
+                            <div class="nintendo-online-overlay">
+                                <h3>Nintendo Switch Online Individual</h3>
+                                <p>Juega en línea con amigos, accede a más de 100 juegos clásicos de NES y Super NES, y guarda tus datos en la nube.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="nintendo-online-card">
+                            <img src="https://cdn2.steamgriddb.com/hero_thumb/8cca55a3ce9504c4e1fac4e6adc96340.jpg" alt="Nintendo Switch Online Family">
+                            <div class="nintendo-online-overlay">
+                                <h3>Nintendo Switch Online Familiar</h3>
+                                <p>Todos los beneficios del plan individual para hasta 8 cuentas de Nintendo. Perfecto para familias y amigos.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="nintendo-online-card">
+                            <img src="https://cdn2.steamgriddb.com/hero_thumb/f1ddf31d687ba7d8539da45a92dbc68d.jpg" alt="Nintendo Switch Online + Expansion Pack">
+                            <div class="nintendo-online-overlay">
+                                <h3>Nintendo Switch Online + Expansion Pack</h3>
+                                <p>Todo lo anterior más juegos de Nintendo 64 y SEGA Genesis, DLC adicional para juegos selectos, y más.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="nintendo-online-card">
+                            <img src="https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_1.5/c_scale,w_600/ncom/en_US/merchandising/switch-online/classic-games" alt="Juegos Clásicos">
+                            <div class="nintendo-online-overlay">
+                                <h3>Juegos Clásicos</h3>
+                                <p>Accede a una biblioteca creciente de juegos clásicos de NES, Super NES, Nintendo 64 y SEGA Genesis.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-btn next-btn" onclick="moveNintendoOnlineCarousel(1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <!-- Botón para explorar todos los planes -->
+                <button class="explore-all-plans" onclick="showNotification('Explorando todos los planes de Nintendo Switch Online', 'info')">
+                    Explorar todos los planes
+                </button>
+            </div>
+        </section>
+    </section>
+
+    <!-- SECCIÓN JUEGOS -->
+    <section id="section-juegos" class="content-section" style="display: none;">
+        <div class="container" style="padding: 100px 20px;">
+            <h1 style="color: #0066cc; margin-bottom: 40px;">Catálogo Completo de Juegos Nintendo</h1>
+            <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 40px;">Explora nuestra colección de juegos para Nintendo Switch</p>
+            
+            <div class="games-grid">
+                <div class="game-card">
+                    <img src="https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000001130/c42553b4fd0312c31e70ec7468c6c9bccd739f340152925b9600631f2d29f8b5" alt="Super Mario Odyssey">
+                    <div class="game-info">
+                        <h3>Super Mario Odyssey</h3>
+                        <p>Únete a Mario en una aventura masiva en 3D por el mundo</p>
+                        <button class="add-to-cart-btn" onclick="addToCart('mario-odyssey-catalog', 'Super Mario Odyssey', 59.99, 'https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000001130/c42553b4fd0312c31e70ec7468c6c9bccd739f340152925b9600631f2d29f8b5')">Añadir - $59.99</button>
+                    </div>
+                </div>
+                
+                <div class="game-card">
+                    <img src="https://www.nintendo.com/eu/media/images/10_share_images/games_15/wiiu_14/SI_WiiU_TheLegendOfZeldaBreathOfTheWild_image1600w.jpg" alt="The Legend of Zelda">
+                    <div class="game-info">
+                        <h3>The Legend of Zelda: Breath of the Wild</h3>
+                        <p>Explora Hyrule en esta aventura épica</p>
+                        <button class="add-to-cart-btn" onclick="addToCart('zelda-botw-catalog', 'The Legend of Zelda: Breath of the Wild', 59.99, 'https://www.nintendo.com/eu/media/images/10_share_images/games_15/wiiu_14/SI_WiiU_TheLegendOfZeldaBreathOfTheWild_image1600w.jpg')">Añadir - $59.99</button>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <img src="https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000039945/dcb496d7cf954c7eb51ab2e5d0c27918fb7f055e50f4e902135bd4a70a44b491" alt="Pokémon Legends">
+                    <div class="game-info">
+                        <h3>Pokémon Legends: Arceus</h3>
+                        <p>Completa la primera Pokédex de la región de Hisui</p>
+                        <button class="add-to-cart-btn" onclick="addToCart('pokemon-arceus-catalog', 'Pokémon Legends: Arceus', 59.99, 'https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000039945/dcb496d7cf954c7eb51ab2e5d0c27918fb7f055e50f4e902135bd4a70a44b491')">Añadir - $59.99</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN NINTENDO SWITCH -->
+    <section id="section-nintendoswitch" class="content-section" style="display: none;">
+        <div class="container" style="padding: 100px 20px;">
+            <h1 style="color: #0066cc; margin-bottom: 40px;">Nintendo Switch</h1>
+            <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 40px;">La consola híbrida de Nintendo</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <!-- Nintendo Switch OLED -->
+                <div style="background: linear-gradient(135deg, #e60012, #cc0010); border-radius: 15px; overflow: hidden; text-align: center; box-shadow: 0 10px 30px rgba(230, 0, 18, 0.3);">
+                    <div style="height: 200px; background: #000; display: flex; align-items: center; justify-content: center; padding: 20px;">
+                        <img src="https://home.ripley.com.pe/Attachment/WOP_5/2031281180240/2031281180240_2.jpg" 
+                             alt="Nintendo Switch OLED" 
+                             style="max-height: 180px; max-width: 100%; object-fit: contain;">
+                    </div>
+                    <div style="padding: 30px;">
+                        <h3 style="color: white; margin-bottom: 15px; font-size: 1.5rem;">Nintendo Switch OLED</h3>
+                        <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px; line-height: 1.5;">
+                            Pantalla OLED de 7 pulgadas, soporte ajustable y base con puerto LAN
+                        </p>
+                        <p style="color: white; font-size: 2rem; font-weight: bold; margin-bottom: 20px;">$349.99</p>
+                        <button class="add-to-cart-btn" onclick="addToCart('switch-oled', 'Nintendo Switch OLED', 349.99, 'https://home.ripley.com.pe/Attachment/WOP_5/2031281180240/2031281180240_2.jpg')">
+                            Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Nintendo Switch Standard -->
+                <div style="background: linear-gradient(135deg, #0066cc, #0052a3); border-radius: 15px; overflow: hidden; text-align: center; box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);">
+                    <div style="height: 200px; background: #000; display: flex; align-items: center; justify-content: center; padding: 20px;">
+                        <img src="https://i5.walmartimages.com/seo/Nintendo-Switch-with-Neon-Blue-and-Neon-Red-Joy-Con-Game-console-Full-HD-black-neon-red-neon-blue-Mario-Kart-8-Deluxe_090018d8-417b-47e8-92ce-bdbcf63f9a0b.e997ebb06bf3a68147a32d7dcba5b4d7.jpeg" 
+                             alt="Nintendo Switch" 
+                             style="max-height: 180px; max-width: 100%; object-fit: contain;">
+                    </div>
+                    <div style="padding: 30px;">
+                        <h3 style="color: white; margin-bottom: 15px; font-size: 1.5rem;">Nintendo Switch</h3>
+                        <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px; line-height: 1.5;">
+                            Modelo estándar con pantalla LCD de 6.2 pulgadas, perfecto para jugar en casa o en movimiento
+                        </p>
+                        <p style="color: white; font-size: 2rem; font-weight: bold; margin-bottom: 20px;">$299.99</p>
+                        <button class="add-to-cart-btn" onclick="addToCart('switch-standard', 'Nintendo Switch', 299.99, 'https://i5.walmartimages.com/seo/Nintendo-Switch-with-Neon-Blue-and-Neon-Red-Joy-Con-Game-console-Full-HD-black-neon-red-neon-blue-Mario-Kart-8-Deluxe_090018d8-417b-47e8-92ce-bdbcf63f9a0b.e997ebb06bf3a68147a32d7dcba5b4d7.jpeg')">
+                            Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Nintendo Switch Lite -->
+                <div style="background: linear-gradient(135deg, #00cc66, #00a352); border-radius: 15px; overflow: hidden; text-align: center; box-shadow: 0 10px 30px rgba(0, 204, 102, 0.3);">
+                    <div style="height: 200px; background: #000; display: flex; align-items: center; justify-content: center; padding: 20px;">
+                        <img src="https://http2.mlstatic.com/D_Q_NP_827500-MLA40176358181_122019-O.webp" 
+                             alt="Nintendo Switch Lite" 
+                             style="max-height: 180px; max-width: 100%; object-fit: contain;">
+                    </div>
+                    <div style="padding: 30px;">
+                        <h3 style="color: white; margin-bottom: 15px; font-size: 1.5rem;">Nintendo Switch Lite</h3>
+                        <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px; line-height: 1.5;">
+                            Consola portátil compacta y ligera, diseñada específicamente para juego portátil
+                        </p>
+                        <p style="color: white; font-size: 2rem; font-weight: bold; margin-bottom: 20px;">$199.99</p>
+                        <button class="add-to-cart-btn" onclick="addToCart('switch-lite', 'Nintendo Switch Lite', 199.99, 'https://http2.mlstatic.com/D_Q_NP_827500-MLA40176358181_122019-O.webp')">
+                            Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección adicional de colores disponibles -->
+            <div style="margin-top: 60px;">
+                <h2 style="color: #0066cc; margin-bottom: 30px; text-align: center;">Colores Disponibles</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <!-- Switch OLED Colores -->
+                    <div style="text-align: center;">
+                        <div style="height: 120px; background: #000; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                            <img src="https://i.etsystatic.com/26059596/r/il/b61c58/3709352209/il_fullxfull.3709352209_25kv.jpg" 
+                                 alt="Switch OLED Blanco" 
+                                 style="max-height: 100px; max-width: 90%; object-fit: contain;">
+                        </div>
+                        <p style="color: #ccc; font-weight: bold;">OLED - Blanco</p>
+                    </div>
+                    
+                    <!-- Switch Lite Colores -->
+                    <div style="text-align: center;">
+                        <div style="height: 120px; background: #000; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                            <img src="https://http2.mlstatic.com/D_Q_NP_827500-MLA40176358181_122019-O.webp" 
+                                 alt="Switch Lite Turquesa" 
+                                 style="max-height: 100px; max-width: 90%; object-fit: contain;">
+                        </div>
+                        <p style="color: #ccc; font-weight: bold;">Lite - Turquesa</p>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <div style="height: 120px; background: #000; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                            <img src="https://gamecenterperu.com/wp-content/uploads/2023/11/GC00310_2.jpg" 
+                                 alt="Switch Lite Amarillo" 
+                                 style="max-height: 100px; max-width: 90%; object-fit: contain;">
+                        </div>
+                        <p style="color: #ccc; font-weight: bold;">Lite - Amarillo</p>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <div style="height: 120px; background: #000; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                            <img src="https://media.falabella.com/falabellaPE/130065399_01/w=1500,h=1500,fit=pad" 
+                                 alt="Switch Lite Coral" 
+                                 style="max-height: 100px; max-width: 90%; object-fit: contain;">
+                        </div>
+                        <p style="color: #ccc; font-weight: bold;">Lite - Coral</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN NINTENDO 3DS -->
+    <section id="section-nintendo3ds" class="content-section" style="display: none;">
+        <div class="container" style="padding: 100px 20px;">
+            <h1 style="color: #0066cc; margin-bottom: 40px;">Nintendo 3DS</h1>
+            <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 40px;">Juegos clásicos de Nintendo 3DS</p>
+            
+            <div class="games-grid">
+                <div class="game-card">
+                    <img src="https://cdn2.steamgriddb.com/thumb/5fdbaa11bd42c308322756f60f43785f.jpg" alt="Zelda Link Between Worlds">
+                    <div class="game-info">
+                        <h3>The Legend of Zelda: A Link Between Worlds</h3>
+                        <p>Aventura clásica en el mundo de Hyrule</p>
+                        <button class="add-to-cart-btn" onclick="addToCart('zelda-link-worlds', 'The Legend of Zelda: A Link Between Worlds', 39.99, 'https://cdn2.steamgriddb.com/thumb/5fdbaa11bd42c308322756f60f43785f.jpg')">Añadir - $39.99</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN NINTENDO ONLINE -->
+    <section id="section-nintendoonline" class="content-section" style="display: none;">
+        <div class="container" style="padding: 100px 20px;">
+            <h1 style="color: #0066cc; margin-bottom: 40px; text-align: center;">Nintendo Switch Online</h1>
+            <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 60px; text-align: center;">
+                Juega en línea, accede a juegos clásicos y disfruta de ventajas exclusivas
+            </p>
+            
+            <!-- Aquí puedes reutilizar la sección de Nintendo Online que ya tienes -->
+            <div style="text-align: center;">
+                <button class="explore-all-plans" onclick="showNotification('Explorando Nintendo Switch Online', 'info')">
+                    Ver Planes de Nintendo Switch Online
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN ACCESORIOS -->
+    <section id="section-accesorios" class="content-section" style="display: none;">
+        <div class="container" style="padding: 100px 20px;">
+            <h1 style="color: #0066cc; margin-bottom: 40px;">Accesorios Nintendo</h1>
+            <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 40px;">Mejora tu experiencia de juego</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px;">
+                <div style="background: #1a1a1a; border-radius: 15px; overflow: hidden; border: 1px solid #333;">
+                    <img src="https://oechsle.vteximg.com.br/arquivos/ids/20133115-1000-1000/2772792.jpg?v=638690468985400000" 
+                         alt="Joy-Con" style="width: 100%; height: 250px; object-fit: cover;">
+                    <div style="padding: 20px;">
+                        <h3 style="color: #fff; margin-bottom: 10px;">Joy-Con (L/R)</h3>
+                        <p style="color: #aaa; margin-bottom: 15px;">Controladores inalámbricos para Nintendo Switch</p>
+                        <p style="color: #0066cc; font-weight: bold; font-size: 1.3rem; margin-bottom: 15px;">$79.99</p>
+                        <button class="add-to-cart-btn" onclick="addToCart('joy-con', 'Joy-Con (L/R)', 79.99, 'https://oechsle.vteximg.com.br/arquivos/ids/20133115-1000-1000/2772792.jpg?v=638690468985400000')">
+                            Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+                
+                <div style="background: #1a1a1a; border-radius: 15px; overflow: hidden; border: 1px solid #333;">
+                    <img src="https://lamarinamx.vtexassets.com/arquivos/ids/1348511-800-800?v=638870696418770000&width=800&height=800&aspect=true" 
+                         alt="Pro Controller" style="width: 100%; height: 250px; object-fit: cover;">
+                    <div style="padding: 20px;">
+                        <h3 style="color: #fff; margin-bottom: 10px;">Nintendo Switch Pro Controller</h3>
+                        <p style="color: #aaa; margin-bottom: 15px;">Control profesional para gaming</p>
+                        <p style="color: #0066cc; font-weight: bold; font-size: 1.3rem; margin-bottom: 15px;">$69.99</p>
+                        <button class="add-to-cart-btn" onclick="addToCart('pro-controller', 'Pro Controller', 69.99, 'https://lamarinamx.vtexassets.com/arquivos/ids/1348511-800-800?v=638870696418770000&width=800&height=800&aspect=true')">
+                            Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN NOTICIAS -->
+    <section id="section-noticias" class="content-section" style="display: none;">
+        <div class="container" style="padding: 100px 20px;">
+            <h1 style="color: #0066cc; margin-bottom: 40px;">Noticias Nintendo</h1>
+            <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 40px;">Mantente al día con las últimas novedades</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+                <div style="background: #1a1a1a; border-radius: 15px; overflow: hidden; border: 1px solid #333;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #e60012, #cc0010); display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-newspaper" style="font-size: 4rem; color: white;"></i>
+                    </div>
+                    <div style="padding: 20px;">
+                        <h3 style="color: #fff; margin-bottom: 10px;">Próximos Lanzamientos</h3>
+                        <p style="color: #aaa;">Descubre los juegos más esperados que llegarán pronto a Nintendo</p>
+                    </div>
+                </div>
+
+                <div style="background: #1a1a1a; border-radius: 15px; overflow: hidden; border: 1px solid #333;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #0066cc, #0052a3); display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-trophy" style="font-size: 4rem; color: white;"></i>
+                    </div>
+                    <div style="padding: 20px;">
+                        <h3 style="color: #fff; margin-bottom: 10px;">Eventos y Torneos</h3>
+                        <p style="color: #aaa;">Participa en competiciones oficiales y eventos especiales</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN TIENDA -->
+    <section id="section-tienda" class="content-section" style="display: none;">
+        <div class="container" style="padding: 100px 20px;">
+            <h1 style="color: #0066cc; margin-bottom: 40px;">Nintendo eShop</h1>
+            <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 40px;">Explora todas nuestras ofertas y descuentos</p>
+            
+            <div style="background: linear-gradient(135deg, #e60012, #cc0010); padding: 60px 40px; border-radius: 20px; text-align: center; margin-bottom: 40px;">
+                <h2 style="color: white; font-size: 2.5rem; margin-bottom: 20px;">Ofertas de la Semana</h2>
+                <p style="color: rgba(255,255,255,0.9); font-size: 1.2rem; margin-bottom: 30px;">Hasta 50% de descuento en juegos seleccionados</p>
+                <button style="background: white; color: #e60012; border: none; padding: 15px 40px; border-radius: 25px; font-size: 1.1rem; font-weight: bold; cursor: pointer;">Ver Ofertas</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN ASISTENCIA -->
+    <section id="section-asistencia" class="content-section" style="display: none;">
+        <div class="container" style="padding: 100px 20px;">
+            <h1 style="color: #0066cc; margin-bottom: 40px;">Soporte y Asistencia Nintendo</h1>
+            <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 40px;">¿Necesitas ayuda? Estamos aquí para ti</p>
+            
+            <div style="background: linear-gradient(135deg, #0066cc, #0052a3); padding: 40px; border-radius: 15px; text-align: center;">
+                <h3 style="color: white; font-size: 1.8rem; margin-bottom: 15px;">¿Necesitas ayuda inmediata?</h3>
+                <p style="color: rgba(255,255,255,0.9); margin-bottom: 25px;">Nuestro equipo está disponible para ayudarte</p>
+                <button style="background: white; color: #0066cc; border: none; padding: 15px 35px; border-radius: 25px; font-weight: bold; cursor: pointer;">Contactar Soporte</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="https://logos-world.net/wp-content/uploads/2020/11/Nintendo-Logo.png" alt="Nintendo">
+                </div>
+                <div class="footer-links">
+                    <p>&copy; 2025 Nintendo Store. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="nintendo.js"></script>
+    <script>
+        sessionStorage.setItem('currentPlatform', 'nintendo.html');
+    </script>
+</body>
+</html>

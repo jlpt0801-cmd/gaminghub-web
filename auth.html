@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autenticación - PlayStation Store</title>
+    <link rel="stylesheet" href="auth.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="https://cdn2.steamgriddb.com/logo_thumb/d2dd0c81db17acfecb071c0a32565677.png">
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  emailjs.init("sTq2mFJKYn8HzZSQ4");
+</script>
+
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-header">
+            <img src="https://cdn2.steamgriddb.com/logo_thumb/3e0de21930c6e2fe78ffbc484752cbe3.png" alt="PlayStation" class="auth-logo">
+            <h1>PlayStation Store</h1>
+            <p class="auth-subtitle">Inicia sesión para acceder a tu biblioteca de juegos</p>
+        </div>
+
+        <div class="auth-tabs">
+            <button class="tab-btn active" data-tab="login">
+                <i class="fas fa-sign-in-alt"></i>
+                Iniciar Sesión
+            </button>
+            <button class="tab-btn" data-tab="register">
+                <i class="fas fa-user-plus"></i>
+                Crear Cuenta
+            </button>
+        </div>
+
+        <div class="auth-forms">
+            <!-- Formulario de Login -->
+            <form id="loginForm" class="auth-form active">
+                <div class="form-group">
+                    <label for="loginEmail">
+                        <i class="fas fa-envelope"></i>
+                        Correo electrónico
+                    </label>
+                    <input type="email" id="loginEmail" required placeholder="tu@email.com">
+                    <span class="form-error" id="loginEmailError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">
+                        <i class="fas fa-lock"></i>
+                        Contraseña
+                    </label>
+                    <div class="password-input">
+                        <input type="password" id="loginPassword" required placeholder="Tu contraseña">
+                        <button type="button" class="password-toggle" onclick="togglePassword('loginPassword')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <span class="form-error" id="loginPasswordError"></span>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="rememberMe">
+                        <span class="checkmark"></span>
+                        Mantener sesión iniciada
+                    </label>
+                </div>
+                <button type="submit" class="auth-btn" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Iniciar Sesión</span>
+                    <div class="btn-loader" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                </button>
+                <div class="auth-links">
+                    <a href="#" id="forgotPassword">
+                        <i class="fas fa-question-circle"></i>
+                        ¿Olvidaste tu contraseña?
+                    </a>
+                </div>
+            </form>
+
+            <!-- Formulario de Registro -->
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="registerName">
+                        <i class="fas fa-user"></i>
+                        Nombre completo
+                    </label>
+                    <input type="text" id="registerName" required placeholder="Tu nombre completo">
+                    <span class="form-error" id="registerNameError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">
+                        <i class="fas fa-envelope"></i>
+                        Correo electrónico
+                    </label>
+                    <input type="email" id="registerEmail" required placeholder="tu@email.com">
+                    <span class="form-error" id="registerEmailError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">
+                        <i class="fas fa-lock"></i>
+                        Contraseña
+                    </label>
+                    <div class="password-input">
+                        <input type="password" id="registerPassword" required placeholder="Mínimo 6 caracteres">
+                        <button type="button" class="password-toggle" onclick="togglePassword('registerPassword')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="password-strength" id="passwordStrength">
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strengthFill"></div>
+                        </div>
+                        <span class="strength-text" id="strengthText">Escribe una contraseña</span>
+                    </div>
+                    <span class="form-error" id="registerPasswordError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">
+                        <i class="fas fa-lock"></i>
+                        Confirmar contraseña
+                    </label>
+                    <div class="password-input">
+                        <input type="password" id="confirmPassword" required placeholder="Repite tu contraseña">
+                        <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <span class="form-error" id="confirmPasswordError"></span>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="acceptTerms" required>
+                        <span class="checkmark"></span>
+                        Acepto los <a href="#" class="terms-link">Términos de Servicio</a> y la <a href="#" class="terms-link">Política de Privacidad</a>
+                    </label>
+                </div>
+                <button type="submit" class="auth-btn" id="registerBtn">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Crear Cuenta</span>
+                    <div class="btn-loader" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                </button>
+            </form>
+        </div>
+
+        <div class="auth-divider">
+            <span>o continúa con</span>
+        </div>
+
+        <div class="social-auth">
+            <button class="social-btn google-btn" onclick="signInWithGoogle()">
+                <i class="fab fa-google"></i>
+                Google
+            </button>
+            <button class="social-btn facebook-btn" onclick="signInWithFacebook()">
+                <i class="fab fa-facebook-f"></i>
+                Facebook
+            </button>
+        </div>
+
+        <div class="auth-footer">
+            <p>¿Necesitas ayuda? <a href="#" class="help-link">Centro de Ayuda de PlayStation</a></p>
+            <div class="back-to-store">
+                <a href="ps5.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Volver a la tienda
+                </a>
+            </div>
+        </div>
+
+        <div id="authMessage" class="auth-message"></div>
+    </div>
+
+    <!-- Loading overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Procesando...</p>
+        </div>
+    </div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra - PlayStation Store</title>
+    <link rel="stylesheet" href="checkout.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="https://cdn2.steamgriddb.com/logo_thumb/d2dd0c81db17acfecb071c0a32565677.png">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <img src="https://download.logo.wine/logo/PlayStation/PlayStation-Logo.wine.png" alt="PlayStation" class="logo">
+            </div>
+            
+<ul class="nav-menu">
+    <li><a href="#" id="backToStoreLink" class="nav-link">Volver a la Tienda</a></li>
+</ul>
+            
+            <div class="nav-actions">
+                <button class="cart-btn" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="headerCartCount">0</span>
+                </button>
+                <div class="user-menu">
+                    <button class="login-btn" id="loginBtn">Iniciar sesión</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="checkout-container">
+        <h1 class="checkout-title">Finalizar Compra</h1>
+        
+        <div class="checkout-content">
+            <!-- Resumen del Pedido -->
+            <div class="order-summary">
+                <h2>Resumen del Pedido</h2>
+                <div id="orderItems">
+                    <!-- Los productos se cargarán dinámicamente -->
+                </div>
+                <div class="order-totals">
+                    <div class="total-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">$0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Impuestos (18%):</span>
+                        <span id="taxes">$0.00</span>
+                    </div>
+                    <div class="total-row grand-total">
+                        <span>Total:</span>
+                        <span id="total">$0.00</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Información de Envío y Pago -->
+            <div class="checkout-forms">
+                <!-- Información de Contacto -->
+                <div class="form-section">
+                    <h2><i class="fas fa-user"></i> Información de Contacto</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico *</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono *</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Información de Envío -->
+                <div class="form-section">
+                    <h2><i class="fas fa-truck"></i> Información de Envío</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">Nombres *</label>
+                            <input type="text" id="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Apellidos *</label>
+                            <input type="text" id="lastName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Dirección *</label>
+                        <input type="text" id="address" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">Ciudad *</label>
+                            <input type="text" id="city" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="postalCode">Código Postal *</label>
+                            <input type="text" id="postalCode" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">País *</label>
+                        <select id="country" required>
+                            <option value="">Seleccionar país</option>
+                            <option value="PE" selected>Perú</option>
+                            <option value="MX">México</option>
+                            <option value="CO">Colombia</option>
+                            <option value="AR">Argentina</option>
+                            <option value="CL">Chile</option>
+                            <option value="ES">España</option>
+                            <option value="US">Estados Unidos</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Método de Pago -->
+                <div class="form-section">
+                    <h2><i class="fas fa-credit-card"></i> Método de Pago</h2>
+                    
+                    <div class="payment-methods">
+                        <div class="payment-tabs">
+                            <button class="payment-tab active" data-method="card">
+                                <i class="fas fa-credit-card"></i> Tarjeta de Crédito/Débito
+                            </button>
+                            <button class="payment-tab" data-method="yape">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Icono_de_la_aplicaci%C3%B3n_Yape.png" alt="Yape" class="payment-icon"> Yape
+                            </button>
+                            <button class="payment-tab" data-method="plin">
+                                <img src="https://images.seeklogo.com/logo-png/38/2/plin-logo-png_seeklogo-386806.png" alt="Plin" class="payment-icon"> Plin
+                            </button>
+                        </div>
+                        
+                        <div class="payment-content">
+                            <!-- Tarjeta de Crédito/Débito -->
+                            <div id="card-payment" class="payment-method active">
+                                <div class="form-group">
+                                    <label for="cardNumber">Número de Tarjeta *</label>
+                                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                                    <div class="card-icons">
+                                        <i class="fab fa-cc-visa"></i>
+                                        <i class="fab fa-cc-mastercard"></i>
+                                        <i class="fab fa-cc-amex"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="cardName">Nombre en la Tarjeta *</label>
+                                        <input type="text" id="cardName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cardCvv">CVV *</label>
+                                        <input type="text" id="cardCvv" placeholder="123" maxlength="4">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="cardExpiry">Fecha de Expiración *</label>
+                                        <div class="expiry-fields">
+                                            <select id="cardExpMonth" required>
+                                                <option value="">Mes</option>
+                                                <option value="01">01</option>
+                                                <option value="02">02</option>
+                                                <option value="03">03</option>
+                                                <option value="04">04</option>
+                                                <option value="05">05</option>
+                                                <option value="06">06</option>
+                                                <option value="07">07</option>
+                                                <option value="08">08</option>
+                                                <option value="09">09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                            <select id="cardExpYear" required>
+                                                <option value="">Año</option>
+                                                <option value="2023">2023</option>
+                                                <option value="2024">2024</option>
+                                                <option value="2025">2025</option>
+                                                <option value="2026">2026</option>
+                                                <option value="2027">2027</option>
+                                                <option value="2028">2028</option>
+                                                <option value="2029">2029</option>
+                                                <option value="2030">2030</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cardType">Tipo de Tarjeta *</label>
+                                        <select id="cardType" required>
+                                            <option value="">Seleccionar tipo</option>
+                                            <option value="visa">Visa</option>
+                                            <option value="mastercard">Mastercard</option>
+                                            <option value="amex">American Express</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Yape -->
+                            <div id="yape-payment" class="payment-method">
+                                <div class="digital-wallet-info">
+                                    <div class="wallet-icon">
+                                        <img src="img/qr.jpeg" alt="Yape">
+                                    </div>
+                                    <p>Serás redirigido a Yape para completar tu pago de manera segura.</p>
+                                    <div class="form-group">
+                                        <label for="yapePhone">Número de teléfono registrado en Yape *</label>
+                                        <input type="tel" id="yapePhone" placeholder="+51 987 654 321">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Plin -->
+                            <div id="plin-payment" class="payment-method">
+                                <div class="digital-wallet-info">
+                                    <div class="wallet-icon">
+                                        <img src="img/qr.jpeg" alt="Plin">
+                                    </div>
+                                    <p>Serás redirigido a Plin para completar tu pago de manera segura.</p>
+                                    <div class="form-group">
+                                        <label for="plinPhone">Número de teléfono registrado en Plin *</label>
+                                        <input type="tel" id="plinPhone" placeholder="+51 987 654 321">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Términos y Condiciones -->
+                <div class="form-section">
+                    <div class="terms">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="terms">
+                            <span class="checkmark"></span>
+                            He leído y acepto los <a href="#">términos y condiciones</a> y las <a href="#">políticas de privacidad</a>
+                        </label>
+                    </div>
+                    
+                    <button id="payButton" class="pay-button">
+                        <i class="fas fa-lock"></i> Pagar Ahora
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Modal de Confirmación -->
+<div id="confirmationModal" class="modal">
+    <div class="modal-content confirmation-modal">
+        <div class="modal-header">
+            <h2>¡Pedido Confirmado!</h2>
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="success-animation">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <p class="confirmation-message">Tu pedido ha sido recibido y está siendo procesado.</p>
+            
+            <div class="order-summary-confirm">
+                <h3>Resumen de tu Pedido</h3>
+                <div class="order-details-grid">
+                    <div class="detail-item">
+                        <span class="detail-label">Número de Pedido:</span>
+                        <span class="detail-value" id="orderNumber">PS-123456789</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Fecha de Compra:</span>
+                        <span class="detail-value" id="orderDate">${new Date().toLocaleDateString('es-ES')}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Total Pagado:</span>
+                        <span class="detail-value" id="paidAmount">$0.00</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Estado:</span>
+                        <span class="detail-value status-pending">Pendiente de Confirmación</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Método de Pago:</span>
+                        <span class="detail-value" id="paymentMethod">Tarjeta de Crédito</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Fecha Estimada de Entrega:</span>
+                        <span class="detail-value" id="deliveryDate">3-5 días hábiles</span>
+                    </div>
+                </div>
+                
+                <div class="shipping-info">
+                    <h4>Dirección de Envío</h4>
+                    <p id="shippingAddress">Cargando...</p>
+                </div>
+            </div>
+            
+            <div class="next-steps">
+                <h4>¿Qué sigue?</h4>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> Recibirás un email de confirmación</li>
+                    <li><i class="fas fa-truck"></i> Te notificaremos cuando tu pedido sea enviado</li>
+                    <li><i class="fas fa-qrcode"></i> Recibirás un código de seguimiento</li>
+                </ul>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="continueShopping" class="continue-btn">
+                <i class="fas fa-shopping-bag"></i> Seguir Comprando
+            </button>
+            <button id="viewOrder" class="view-order-btn">
+                <i class="fas fa-eye"></i> Ver Detalles Completos
+            </button>
+            <button id="printReceipt" class="print-btn">
+                <i class="fas fa-print"></i> Imprimir Recibo
+            </button>
+        </div>
+    </div>
+</div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Procesando pago...</p>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="checkout.js"></script>
+</body>
+</html>

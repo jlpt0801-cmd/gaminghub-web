@@ -1,0 +1,226 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+html, body {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+}
+
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    z-index: -1;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: auto;
+    height: 100vh;
+}
+
+/* Ocultar scrollbars */
+.container::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.container::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+
+/* Para Firefox */
+.container {
+    scrollbar-width: none;
+}
+
+/* Para Internet Explorer y Edge */
+.container {
+    -ms-overflow-style: none;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+header h1 {
+    font-size: 4rem;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+header h2 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+}
+
+.platforms {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    height: 60vh;
+}
+
+.platform-card {
+    flex: 1;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+}
+
+.platform-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 60%);
+    z-index: 1;
+}
+
+.platform-card:hover {
+    flex: 2;
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.platform-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.platform-card:hover .platform-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.logo-container {
+    margin-bottom: 1.5rem;
+}
+
+.platform-logo {
+    max-width: 180px;
+    max-height: 100px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.7));
+}
+
+.platform-content h3 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.platform-content p {
+    font-size: 1.2rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+#playstation {
+    background-image: url('https://game-reviewer.com/wp-content/uploads/2022/10/1173124.jpg');
+}
+
+#xbox {
+    background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/7d4cc70b-f7c4-499a-a91a-f3e86b8b39f0/de1t77n-ff3f16a0-e543-4c6a-ad2b-f4949e64986e.jpg/v1/fill/w_1280,h_1280,q_75,strp/halo_infinite___wallpaper_by_halomika_de1t77n-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTI4MCIsInBhdGgiOiJcL2ZcLzdkNGNjNzBiLWY3YzQtNDk5YS1hOTFhLWYzZTg2YjhiMzlmMFwvZGUxdDc3bi1mZjNmMTZhMC1lNTQzLTRjNmEtYWQyYi1mNDk0OWU2NDk4NmUuanBnIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.X3cAiDuPxAu-amQ7Mj7SYXPgNGlsUV2belRcShhLjhA');
+}
+
+#nintendo {
+    background-image: url('https://images7.alphacoders.com/821/thumb-1920-821837.jpg');
+}
+
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* Efectos responsivos */
+@media (max-width: 900px) {
+    .platforms {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .platform-card {
+        height: 200px;
+    }
+    
+    header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .platform-logo {
+        max-width: 120px;
+    }
+    
+    .platform-content h3 {
+        font-size: 1.8rem;
+    }
+    
+    /* Añade esto para móviles */
+    .container {
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Efectos de transición para las tarjetas */
+.platform-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.platform-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.platform-card:active {
+    transform: scale(0.95);
+}
+
+/* Efecto de carga */
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0.7; }
+}
+
+.body-fade {
+    animation: fadeOut 0.3s ease forwards;
+}
